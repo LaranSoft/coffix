@@ -164,6 +164,8 @@ body {
     background-image: linear-gradient(#fff, #f1f1f1);
 }
 
+.cursorPointer {cursor: pointer;}
+
 .blue {color: #20529E;}
 .white{color: #FFFFFF;}
 

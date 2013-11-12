@@ -33,6 +33,10 @@
 				<div id="main-content">
 					<div id="blockMask" class="noDisplay"></div>
 					<c:set var="hideProfileControls">true</c:set>
+					<c:set var="useCustomStatusBarContent">true</c:set>
+					<c:set var="statusBarCustomContent">
+						<span class="statusBarRegistrationTitle">Registrazione</span>
+					</c:set>
 					<%@include file="common/statusBar.jsp"%>
 					<div id="registration-container">
 						<div class="row high">

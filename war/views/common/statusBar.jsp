@@ -61,6 +61,25 @@ $(function(){
 			});
 		</script>
 	</c:if>
+	
+	<c:if test="${showCoffixIcon != false}">
+		<span id="statusBarCoffixIcon" class="lFloating"></span>
+		
+		<c:if test="${hideBackButton != true}">
+			<script>
+				$(function(){
+					UI = $.extend(UI, {
+						statusBarCoffixIcon: $('#statusBarCoffixIcon')
+		            });
+					
+					UI.statusBarCoffixIcon.addClass('cursorPointer').on('click', function(){
+	                	UI.backBtn.click();
+	                });
+				});
+			</script>
+		</c:if>
+	</c:if>
+	
 	<c:if test="${hideProfileControls != true}">
 		<c:choose>
 			<c:when test="${user != null}">
@@ -69,8 +88,11 @@ $(function(){
 				</span>
 				
 				<c:if test="${showPlusBtn == true}">
-					<span id="statusBar_plusBtnContainer" class="statusBar_btnContainer rFloating">
-						<div id="statusBar_plusBtn" class="statusBar_btn"></div>
+					<c:if test="${plusBtnIcon == null}">
+						<c:set var="plusBtnIcon">add.png</c:set>
+					</c:if>
+					<span id="statusBar_plusBtn" class="statusBar_Btn rFloating">
+						<img id="statusBar_plusBtnIcon" src="/resources/images/${plusBtnIcon}"/>
 					</span>
 					<script>
 						$(function(){
@@ -82,7 +104,7 @@ $(function(){
 						});
 					</script>
 				</c:if>
-				
+
 				<div id="profileMenu" class="noDisplay">
 					<label id="changePwdBtn" class="defaultLabel noWrap first menuItem">Cambia password</label>
 					<label id="logoutBtn" class="defaultLabel noWrap last menuItem"><fmt:message key="COMMON.LOGOUT"/></label>
@@ -193,4 +215,5 @@ $(function(){
 		    </c:otherwise>
 		</c:choose>
 	</c:if>
+	<c:if test="${useCustomStatusBarContent == true}">${statusBarCustomContent}</c:if>
 </div>

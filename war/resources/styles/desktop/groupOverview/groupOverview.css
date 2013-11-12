@@ -23,9 +23,8 @@
 	border-bottom: 1px solid lightgray;
 }
 
-#otherwiseBtn {
-	margin-bottom: 8px;
-	margin-left: 20px;
+#otherwiseBtn .defaultButtonLabel {
+	font-size: 14px;
 }
 
 #suggestedOffererContainer {

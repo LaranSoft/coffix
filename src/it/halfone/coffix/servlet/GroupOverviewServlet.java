@@ -121,6 +121,7 @@ public class GroupOverviewServlet extends TwoStepServlet {
 			cofferList.add(coffer);
 		}
 		request.setAttribute("coffers", cofferList);
+		request.setAttribute("groupName", groupEntity.getProperty(Entities.Group.Property.NAME));
 
 		request.setAttribute("now", new Date().getTime());
 		

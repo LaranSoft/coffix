@@ -74,7 +74,15 @@
 						</div>
 						<c:set var="hideBackButton">true</c:set>
 						<c:set var="showPlusBtn">${user != null}</c:set>
+						<c:set var="plusBtnIcon">group_add.png</c:set>
 						<c:set var="plusBtnOnClick">showCreateGroupDialog</c:set>
+						<c:set var="showCoffixIcon">${user != null}</c:set>
+						<c:if test="${user != null}">
+							<c:set var="useCustomStatusBarContent">true</c:set>
+							<c:set var="statusBarCustomContent">
+								<span class="statusBarHomeTitle lFloating white">Coffix</span>
+							</c:set>
+						</c:if>
 						<%@include file="common/statusBar.jsp"%>
 						<div class="row">
 							<label id="errorMessage" class="defaultLabel red smallLabel noDisplay"></label>
@@ -106,7 +114,7 @@
 								<div class="row">
 									<label id="headerLabel" class="defaultLabel"></label>
 								</div>
-								<div class="row">
+								<div class="row full">
 									<div id="groupContainer" class="listContainer"></div>
 								</div>
 							</c:otherwise>

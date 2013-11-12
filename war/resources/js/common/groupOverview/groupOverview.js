@@ -5,29 +5,27 @@ $(function(){
 	UI = $.extend(UI, {
 		inviteUserBtn: $('#inviteUserBtn'), 
 		otherwiseBtn: $('#otherwiseBtn'),
-		positionLabel: $('#positionLabel')
+		positionLabel: $('#positionLabel'),
+		statusBarGroupOverviewTitle: $('.statusBarGroupOverviewTitle')
 	});
 	
-	
-	UI.inviteUserBtn.bind('click', function(){
-		if(UI.inviteUserBtn.attr('disabled') != 'true'){
-			UI.inviteUserBtn.attr('disabled', 'true');
-			
+	var goToManageGroupPage = function(){
+		showLoadingMask(function(){
 			$.post('manageGroup', {
 				groupId: groupId
 			}).done(function(response){
 				if(response.substr(0, 9) == 'redirect_'){
 					response = response.substr(9);
 					redirect(response);
-				} else if(response.substr(0, 6) == 'error_'){
-					response = response.substr(6);
-					//TODO: mostrare il messaggio di errore
 				} else {
 					window.location.href = response;
 				}
 			});
-		}
-	});
+		});
+	};
+	
+	UI.inviteUserBtn.bind('click', goToManageGroupPage);
+	UI.statusBarGroupOverviewTitle.bind('click', goToManageGroupPage);
 	
 	createCoffer = function(){
 		showLoadingMask(function(){

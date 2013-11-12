@@ -63,6 +63,13 @@
 					<div id="blockMask" class="noDisplay"></div>
 					<c:set var="showPlusBtn">true</c:set>
 					<c:set var="plusBtnOnClick">createCoffer</c:set>
+					<c:set var="plusBtnIcon">coffee_add.png</c:set>
+					<c:set var="useCustomStatusBarContent">true</c:set>
+					<c:set var="statusBarCustomContent">
+						<span class="statusBarGroupOverviewTitle">${groupName}<br>
+						    <span class="statusBarGroupOverviewSubTitle"><fmt:message key="GROUP_OVERVIEW.GROUP_DETAILS_LINK.${cssPath}"/></span>
+						</span>
+					</c:set>
 					<%@include file="common/statusBar.jsp"%>
 					<div id="index-container">
 						<c:choose>
@@ -79,10 +86,11 @@
 									<label id="positionLabel" class="defaultLabel"><fmt:message key="INDEX.TODAY_IS"/></label>
 								</div>
 								<div class="row">
-									<label class="defaultLabel noWrapLabel">${nextOfferer}</label>
-									<button id="otherwiseBtn" class="defaultButton blue small" type="button">
-										<span class="defaultButtonLabel blueButtonLabel"><fmt:message key="COMMON.QUESTION.OTHERWISE"/></span>
-									</button>
+									<span class="defaultLabel noWrapLabel">${nextOfferer}
+										<button id="otherwiseBtn" class="defaultButton blue small rFloating" type="button">
+											<span class="defaultButtonLabel blueButtonLabel"><fmt:message key="COMMON.QUESTION.OTHERWISE"/></span>
+										</button>
+									</span>
 								</div>
 								<div class="row full high">
 									<div id="index_activeCoffers"></div>

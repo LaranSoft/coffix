@@ -5,6 +5,7 @@
 }
 
 .row {padding: 0px 20px;}
+.row.full {padding: 0px;}
 .row, .row.full {margin-bottom: 20px;}
 .row.high{padding-top: 20px;}
 
