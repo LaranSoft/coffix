@@ -1,0 +1,63 @@
+#index-container .ui-accordion-header {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	height: 48px;
+}
+
+#index-container .ui-accordion .ui-accordion-content {
+	padding: 0px 0px;
+	text-indent: 27px;
+	text-align: left;
+}
+
+#index-container .ui-accordion .ui-accordion-content p {
+	font-size: 17px;
+}
+
+.coffererDisplayName {
+	font-size: 17px;
+	line-height: 45px;
+}
+
+.offeredContainer {
+	height: 30px;
+	padding: 10px;
+	border-bottom: 1px solid lightgray;
+}
+
+#otherwiseBtn {
+	margin-top: -15px;
+	margin-left: 15px;
+}
+
+.registerButton {
+	width: 100px;
+}
+
+.cofferCreator {
+	display: none;
+}
+
+.expirationTimeLabel {
+	font-size: 17px;
+}
+
+.cofferExpirationTime {
+	width: 40px;
+	line-height: 45px;
+}
+
+.defaultButton.small.confirmCoffer {
+	position: relative;
+	top: 50%;
+	margin-top: -13px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.defaultButton.small.confirmCoffer .defaultButtonLabel {
+	font-size: 12px;
+	
+}

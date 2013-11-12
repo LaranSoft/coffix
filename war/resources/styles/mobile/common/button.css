@@ -1,0 +1,7 @@
+.defaultButton .defaultButtonLabel {
+	font-size: 20px;
+}
+
+.defaultButton.small .defaultButtonLabel {
+	font-size: 15px;
+}

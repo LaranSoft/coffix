@@ -1,0 +1,26 @@
+===Funzionalità===
+
+Gestione della registrazione mediante email
+
+Gestione dell'invio delle email
+
+Sistemare il funzionamento del tasto indietro (non va bene che si limiti a fare il back del browser)
+
+===Controlli di sicurezza===
+
+nella pagina di dettaglio gruppo bisogna essere sicuri che il richiedente sia un partecipante del gruppo richiesto
+
+in ogni pagina in cui si va ad agire su un gruppo bisogna inserire il controllo di sicurezza che l'utente in sessione sia abilitato a fare l'operazione
+
+===Rifiniture===
+
+valutare se dalla regola css .ui-accordion .ui-accordion-header del file jQuery.ui.min.css, riga 7 può essere levata la dichiarazione position: relative; che interferisce con lo scroll. 
+
+richiamare la showloadingmask per mostrare la maschera nera
+
+Aggiungere ad ogni chiamata ajax onFail("101")
+
+Rivedere i meccanismi di post / get
+
+Internazionalizzazione:
+	- chooseOfferer.jsp

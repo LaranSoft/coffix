@@ -1,0 +1,92 @@
+#profileContainer {
+	border-bottom: 1px solid lightgray;
+	background-color: #20529E;
+	top: 0px;
+	height: 50px;
+}
+
+#loginButtonsContainer {
+	padding: 0px 5px;
+	position: relative;
+	line-height: 50px;
+}
+
+#registerBtn,
+#loginBtn {
+	margin: 0px 10px;
+}
+
+#statusBar_orLabel {
+	margin: 0px 5px;
+	text-shadow: none;
+}
+
+#profileIcon {
+	position: relative;
+	cursor: pointer;
+}
+
+#profileMenu {
+	background: url(/resources/images/bg.png) repeat fixed;
+	z-index: 100;
+	box-shadow: -4px 7px 12px lightgray;
+	position: absolute;
+	float: right;
+	right: -0px;
+	top: 50px;
+}
+
+#profileMenu .first {
+	border-bottom: 1px solid lightgray;
+}
+
+#profileMenu .menuItem {
+	display: block;
+	line-height: 50px;
+	text-align: right;
+	cursor: pointer;
+	font-size: 25px;
+	margin: 0px 10px;
+}
+
+#profileMenu .menuItem:hover {
+	color: #FF3D3D;
+}
+
+#backBtn {
+	line-height: 50px;
+	width: 50px;
+	text-align: center;
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.statusBar_btnContainer {
+	width: 50px;
+	height: 50px;
+}
+
+.statusBar_btnContainerPressed {
+	background: url(/resources/images/bg.png);
+}
+
+.statusBar_btn {
+	font-size: 35px;
+	height: 100%;
+}
+
+#statusBar_plusBtn {
+    background: url(/resources/images/add.png) no-repeat;
+	background-position: center;
+}
+
+#statusBar_profileBtn {
+	background: url(/resources/images/menu.png) no-repeat;
+	background-position: center;
+}
+
+.statusBar_btnContainerPressed #statusBar_profileBtn {
+	background: url(/resources/images/menuHover.png) no-repeat;
+	background-position: center;
+}

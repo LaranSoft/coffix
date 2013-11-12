@@ -1,0 +1,13 @@
+#profileContainer {
+	width: 100%;
+	left: 0px;
+}
+
+#profileIcon {
+	width: 35px;
+	height: 35px;
+}
+
+.shadow {
+	box-shadow: 0 22px 15px -11px lightgray;
+}

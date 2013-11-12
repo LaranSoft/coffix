@@ -1,0 +1,48 @@
+#index_activeCoffers {
+	min-width: 500px;
+	margin: 0 auto;
+}
+
+#index-container .ui-accordion .ui-accordion-content {
+	padding: 0px 0px;
+	text-indent: 27px;
+	text-align: left;
+}
+
+.cofferCreator {
+	font-size: 10px;
+	position: absolute;
+	top: -2px;
+	left: 2px;
+	font-style: italic;
+}
+
+.offeredContainer {
+	height: 25px;
+	padding: .5em .5em .5em .7em;
+	border-bottom: 1px solid lightgray;
+}
+
+#otherwiseBtn {
+	margin-bottom: 8px;
+	margin-left: 20px;
+}
+
+#suggestedOffererContainer {
+	margin-top: 20px;
+}
+
+.registerButton {
+	width: 80px;
+}
+
+.cofferExpirationTime {
+	width: 85px;
+	height: 20px;
+	text-align: center;
+}
+
+.registerCoffer {
+	position: relative;
+	top: -10px;
+}

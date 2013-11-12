@@ -1,0 +1,21 @@
+#firstLabel {
+	font-size: 91px;
+}
+
+#secondLabel {
+	font-size: 39px;
+}
+
+#thirdLabel {
+	font-size: 60px;
+	padding-left: 70px;
+}
+
+#fourthLabel {
+	font-size: 66px;
+	padding-right: 42px;
+}
+
+#invitationContainer .defaultButton.blue {
+	margin-right: 4px;
+}

@@ -1,0 +1,175 @@
+body {
+	font-family: Tahoma;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+#main-container {
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+	background: url(/resources/images/bg.png) repeat fixed;
+}
+
+#main-content {
+	text-align: center;
+	margin: 0 auto;
+	padding-left: 0px;
+	padding-right: 0px;
+	overflow: hidden;
+}
+
+.row:last-child {margin-bottom: 0px;}
+
+/*********************************************************
+* ELEMENTI DI INPUT
+**********************************************************/
+
+.defaultFieldset{
+	clear: both;
+	font-size: 11px;
+	border:none;
+}
+
+.defaultInput{
+	width: 100%;
+	color: graytext;
+}
+
+.defaultButton{
+	cursor: pointer;
+}
+
+.defaultLabel{
+	color: #20529E;
+	text-shadow: 0 1px 1px white;
+	font-weight: bold;
+}
+
+.link {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/***********************************************************
+*	BOTTONI
+************************************************************/
+
+.defaultButton {
+	font-weight: bold;
+	padding: 0;
+	line-height: normal;
+	margin-right: .1em;
+	cursor: pointer;
+	vertical-align: middle;
+	text-align: center;
+	overflow: visible;
+}
+
+.defaultButton.blue {
+	border: 1px solid #000;
+	background: #006FB6;
+	color: FFF;
+}
+
+.defaultButton.blue:disabled {
+	background: #059eff !important;
+}
+
+.defaultButton.blue:hover {
+	background: #0059A1;
+}
+
+.defaultButton.red {
+	border: 1px solid #000;
+	background: #FF3D3D;
+	color: FFF;
+}
+
+.defaultButton.red:disabled {
+	background: #FF2G2G !important;
+}
+
+.defaultButton.red:hover {
+	background: #FF1A1A;
+}
+
+.defaultButtonLabel {
+	padding: .4em 1em;
+	display: block;
+	line-height: normal;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+}
+
+.blueButtonLabel {
+	color: FFF;
+}
+
+.defaultButton.small {
+	font-size: 0.6em;
+	font-weight: normal;
+	margin: 0px;
+	margin-right: 1px;
+}
+
+/*********************************************************
+* ICONE
+*********************************************************/
+
+.iconR {
+	margin-top: 6px;
+	width: 18px;
+	height: 18px;
+	background: rgba(0,0,0,.4);
+	background-image: url(/resources/images/icons-18-white.png);
+	background-repeat: no-repeat;
+	border-radius: 9px;
+}
+
+.arrowR {
+	background-position: -108px -1px;
+}
+
+/*********************************************************
+* ALTRI COMPONENTI
+*********************************************************/
+
+.dialogMask {
+    position: absolute;
+    border: 1px solid lightgray;
+    background: url(/resources/images/bg.png) repeat fixed;
+    box-shadow: 0px 0px 30px gray;
+    z-index: 10000;
+}
+
+.listContainer {
+	border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+.listItemWrapper {
+	height: 30px;
+    padding: 10px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    text-align: left;
+    background-image: linear-gradient(#fff, #f1f1f1);
+}
+
+.blue {color: #20529E;}
+.white{color: #FFFFFF;}
+
+.rTextAligned {text-align: right;}
+.cTextAligned {text-align: center;}
+
+.blockDisplay {display: block;}
+
+.bold {font-weight: bold}

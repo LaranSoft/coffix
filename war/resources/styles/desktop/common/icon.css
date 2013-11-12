@@ -1,0 +1,22 @@
+.icoLogout {
+	width: 32px;
+	height: 30px;
+	display: inline-block;
+	background: url(../images/icon/ico_logout.png) no-repeat;
+	cursor: pointer;
+}
+
+.icoZoom {
+	width: 64px;
+	height: 64px;
+	display: inline-block;
+	background: url(../images/icon/ico_zoom.png) no-repeat;
+	cursor: pointer;
+}
+
+.icoRequest {
+	width: 64px;
+	height: 64px;
+	background: url(../images/icon/ico_request.png) no-repeat;
+	cursor: pointer;
+}

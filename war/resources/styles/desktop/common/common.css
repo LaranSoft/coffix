@@ -1,0 +1,140 @@
+#main-content {
+	width: 500px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.row {margin-bottom: 20px;}
+.row.high{padding-top: 20px;}
+
+/*********************************************************
+* ELEMENTI DI INPUT
+**********************************************************/
+
+.defaultInput{
+	height: 45px;
+	text-indent: 5px;
+	margin-top: 2px;
+	line-height: 30px;
+	font-size: 20px;
+}
+
+.defaultLabel {
+	font-size: 25px;
+}
+
+.defaultLabel.smallLabel {
+	font-size: 15px;
+}
+
+
+/***********************************************************
+*	BOTTONI
+************************************************************/
+
+.defaultButton {
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+/*********************************************************
+* STATI
+**********************************************************/
+
+.loading {
+	background: url(../../images/ajax-loader.gif) no-repeat;
+	background-position: center;
+}
+
+/*********************************************************
+* COLORI
+**********************************************************/
+
+.red {
+	color: #FF3D3D;
+}
+
+/*********************************************************
+* ALTRI COMPONENTI
+*********************************************************/
+
+#blockMask {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: black;
+    opacity: 0;
+    z-index: 9999;
+}
+
+.dialogMask {
+    top: 50px;
+    width: 340px;
+    padding: 25px 35px;
+}
+
+.dialogButton {
+    margin-top: 20px;
+}
+
+.dialogLabel{
+    margin-bottom: -5px;
+    display: block;
+}
+
+.listContainer {
+    border-radius: 4px;
+}
+
+.listItemWrapper:hover {
+    background-image: linear-gradient(#f6f6f6, #e0e0e0);
+}
+
+.listItemWrapper.clickable:hover,
+.listItemWrapper.clickable .defaultLabel:hover  {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.listItemWrapper:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.listItemWrapper:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom: 1px solid white;
+}
+
+/********************************************************
+* CLASSI A SINGOLA PROPRIETA'
+********************************************************/
+
+.noDisplay {display: none;}
+
+.noVisibility {visibility: hidden;}
+
+.maxW {width: 100%;}
+
+.maxH {height: 100%;}
+
+.topAligned {vertical-align: top;}
+
+.bottomAligned {vertical-align: bottom;}
+
+.rFloating {float: right;}
+
+.lFloating {float: left;}
+
+.rTextAligned {text-align: right;}
+
+.lTextAligned {text-align: left;}
+
+.verticalMiddleAligned {vertical-align: middle;}
+
+.noWrap {white-space: nowrap;}

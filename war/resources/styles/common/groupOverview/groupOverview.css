@@ -1,0 +1,40 @@
+#index-container .ui-accordion-header {
+	text-align: left;
+}
+
+#index-container .ui-accordion .ui-accordion-content {
+	padding: 0px 0px;
+	text-indent: 27px;
+	text-align: left;
+}
+
+#index-container .ui-accordion .ui-accordion-content p {
+	display: inline;
+}
+
+.cofferCreator {
+	font-size: 10px;
+	position: absolute;
+	top: -2px;
+	left: 2px;
+	font-style: italic;
+}
+
+.cofferExpirationTime {
+	float: left;
+}
+
+.offeredContainer.last {
+	border-bottom: 0px;
+}
+
+.negate {
+	color: #FF3D3D;
+}
+
+.coffererDisplayName {margin: 0px 5px;}
+
+.registerCoffer {
+	width: 40px;
+	height: 40px;
+}

@@ -1,0 +1,23 @@
+#profileContainer {width: 500px;}
+
+#profileIcon {
+	width: 30px;
+	height: 30px;
+}
+
+.shadow {
+	box-shadow: 0 14px 9px -7px lightgray;
+}
+
+#registerBtn,
+#loginBtn {
+	cursor: pointer;
+}
+
+
+#backBtn {cursor: pointer;}
+
+#statusBar_profileBtn,
+#statusBar_plusBtn {
+	cursor: pointer;
+}

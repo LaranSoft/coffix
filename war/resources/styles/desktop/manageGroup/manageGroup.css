@@ -1,0 +1,17 @@
+#manageGroup-container,
+#manageGroup_partecipantContainer {
+	max-width: 500px;
+}
+
+.invitedLabel {
+	font-size: 10px;
+	font-style: italic;
+}
+
+.invitedListItemCommandContainer {
+	line-height: 0px;
+}
+
+.defaultButton.small.invitedListItemButton {
+	margin: 5px;
+}

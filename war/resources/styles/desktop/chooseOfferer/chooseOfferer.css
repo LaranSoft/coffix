@@ -1,0 +1,18 @@
+#chooseOfferer-container{
+	min-width: 340px;
+	margin: 0 auto;
+}
+
+#chooseOfferer_offerer-input {
+	margin-bottom: 20px;
+	max-width: 340px;
+}
+
+#chooseOfferer_inviteUser-container {
+	max-width: 340px;
+	margin: 0 auto;
+}
+
+#chooseOfferer_manageGroup-button {
+	margin-top: 10px;
+}
