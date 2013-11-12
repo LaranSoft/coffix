@@ -62,31 +62,34 @@ $(function(){
 	});
 	
 	UI.createCofferBtn.on('click', function(){
-		var offereds = [];
-		UI.offeredContainer.find('[username]').each(function(){
-			offereds.push($(this).attr('username'));
-		});
-		
-		$.post('createCoffer', {
-			offerer: offererUsername,
-			offereds: offereds.join(';'),
-			groupId: groupId
-		}).done(function(response){
-			if(response == ''){
-				$.post('groupOverview', {
-					groupId: groupId
-				}).done(function(response){
-					if(response.substr(0, 9) == 'redirect_'){
-						response = response.substr(9);
-						redirect(response);
-					} else if(response.substr(0, 6) == 'error_'){
-						response = response.substr(6);
-						UI.manageGroupErrorLabel.html(errorCodes['manageInvitation_' + response]).removeClass('noDisplay');
-				    } else {
-				    	window.location.replace(response);
-				    }
-				});
-			}
+		showLoadingMask(function(){
+			var offereds = [];
+			UI.offeredContainer.find('[username]').each(function(){
+				offereds.push($(this).attr('username'));
+			});
+			
+			$.post('createCoffer', {
+				offerer: offererUsername,
+				offereds: offereds.join(';'),
+				groupId: groupId
+			}).done(function(response){
+				if(response == ''){
+					$.post('groupOverview', {
+						groupId: groupId
+					}).done(function(response){
+						window.location.replace(response);
+					}).fail(function(){
+						// TODO deve diventare una gestione che mostri un messaggio di errore
+						hideLoadingMask();
+					});
+				} else {
+					// TODO deve diventare una gestione che mostri un messaggio di errore
+					hideLoadingMask();
+				}
+			}).fail(function(){
+				// TODO deve diventare una gestione che mostri un messaggio di errore
+				hideLoadingMask();
+			});
 		});
 	});
 	
