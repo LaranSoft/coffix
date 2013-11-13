@@ -86,7 +86,7 @@
     display: block;
 }
 
-.listContainer {
+.listContainer.curvedBorder {
     border-radius: 4px;
 }
 
@@ -100,15 +100,18 @@
     text-decoration: underline;
 }
 
-.listItemWrapper:first-child {
+.listItemWrapper.curvedBorder:first-child {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 
-.listItemWrapper:last-child {
+.listItemWrapper.curvedBorder:last-child {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    border-bottom: 1px solid white;
+}
+
+.listItemWrapper:last-child {
+	border-bottom: 1px solid white;
 }
 
 /********************************************************

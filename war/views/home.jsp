@@ -84,7 +84,7 @@
 							</c:set>
 						</c:if>
 						<%@include file="common/statusBar.jsp"%>
-						<div class="row">
+						<div class="row noDisplay">
 							<label id="errorMessage" class="defaultLabel red smallLabel noDisplay"></label>
 						</div>
 						<c:choose>
@@ -103,18 +103,18 @@
 								</div>
 							</c:when>
 							<c:otherwise>
-								<div class="row">
+								<div class="row noDisplay">
 									<div id="invitationHeaderLabelContainer">
 										<label id="invitationHeaderLabel" class="defaultLabel noWrap"></label>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row noDisplay">
 									<div id="invitationContainer" class="listContainer"></div>
 								</div>
-								<div class="row">
+								<div class="row high noDisplay">
 									<label id="headerLabel" class="defaultLabel"></label>
 								</div>
-								<div class="row full">
+								<div class="row full noDisplay">
 									<div id="groupContainer" class="listContainer"></div>
 								</div>
 							</c:otherwise>

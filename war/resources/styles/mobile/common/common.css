@@ -88,19 +88,22 @@
     display: block;
 }
 
-.listContainer {
+.listContainer.curvedBorder {
     border-radius: 12px;
 }
 
-.listItemWrapper:first-child {
+.listItemWrapper.curvedBorder:first-child {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
 
-.listItemWrapper:last-child {
+.listItemWrapper.curvedBorder:last-child {
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    border-bottom: 1px solid white;
+}
+
+.listItemWrapper:last-child {
+	border-bottom: 1px solid white;
 }
 
 /********************************************************

@@ -19,7 +19,7 @@ $(function(){
 	});
 	
 	var onFail = function(errorCode){
-		UI.errorMessageLabel.html(errorCodes[errorCode]).removeClass('noDisplay');
+		UI.errorMessageLabel.html(errorCodes[errorCode]).parent().removeClass('noDisplay');
 		hideLoadingMask();
 	};
 	
@@ -52,11 +52,11 @@ $(function(){
 			});
 		});
 		
-		var headerBundle = bundles.noGroup;
-		if(groupNumber > 0){
-			headerBundle = bundles.myGroups;
+		if(groupNumber == 0){
+			UI.headerLabel.html(bundles.noGroup).parent().removeClass('noDisplay');
+		} else {
+			UI.groupContainer.parent().removeClass('noDisplay');
 		}
-		UI.headerLabel.html(headerBundle);
 	};
 	var groupNumber = 0;
 	createGroupList(groupMap);
@@ -105,8 +105,8 @@ $(function(){
 									$('#' + groupId).remove();
 									invitationNumber--;
 									if(invitationNumber == 0){
-										UI.invitationHeaderLabel.hide();
-										UI.invitationContainer.hide();
+										UI.invitationHeaderLabel.parent().addClass('noDisplay');
+										UI.invitationContainer.parent().addClass('noDisplay');
 									}
 									if(action == '1'){
 										var groupDescription = {};
@@ -126,11 +126,11 @@ $(function(){
 		});
 		
 		if(invitationNumber > 0){
-			UI.invitationHeaderLabel.html(bundles.myInvitation).show();
-			UI.invitationContainer.show();
+			UI.invitationHeaderLabel.html(bundles.myInvitation).parent().removeClass('noDisplay');
+			UI.invitationContainer.parent().removeClass('noDisplay');
 		} else {
-			UI.invitationHeaderLabel.hide();
-			UI.invitationContainer.hide();
+			UI.invitationHeaderLabel.parent().addClass('noDisplay');
+			UI.invitationContainer.parent().addClass('noDisplay');
 		}
 	};
 	var invitationNumber = 0;
