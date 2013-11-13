@@ -59,9 +59,17 @@
 
 .defaultButton.small.confirmCoffer .defaultButtonLabel {
 	font-size: 12px;
-	
 }
 
 .statusBarGroupOverviewSubTitle{
-	font-size: 10px;
+	font-size: 12px;
+	padding-left: 5px;
+	line-height: 20px;
 }
+
+.statusBarGroupOverviewTitle {
+	font-size: 20px;
+}
+
+#statusBarCoffixIcon {margin-right: 0px !important;}
+#statusBar_plusBtn {width: 40px;}

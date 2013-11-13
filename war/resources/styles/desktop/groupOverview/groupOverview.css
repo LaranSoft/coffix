@@ -45,3 +45,12 @@
 	position: relative;
 	top: -10px;
 }
+
+.statusBarGroupOverviewTitle,
+.statusBarGroupOverviewSubtitle {
+	cursor: pointer;	
+}
+
+.statusBarGroupOverviewTitle {
+	font-size: 25px;
+}

@@ -39,20 +39,18 @@
 	height: 40px;
 }
 
-.statusBarGroupOverviewTitle,
-.statusBarGroupOverviewSubtitle {
-	cursor: pointer;	
-}
-
 .statusBarGroupOverviewTitle {
 	height: 50px;
 	float: left;
 	text-align: left;
 	color: white;
-	font-size: 25px;
 }
 
 .statusBarGroupOverviewSubtitle {
    	font-size: 15px;
    	font-style: italic;
+}
+
+.statusBarGroupOverviewTitle {
+	font-size: 25px;
 }
