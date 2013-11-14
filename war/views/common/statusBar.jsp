@@ -23,7 +23,7 @@ $(function(){
 });
 </script>
 
-<c:if test="${user != null}">
+<c:if test="${user != null && hideProfileBtn != true}">
 	<div id="changePasswordMask" class="dialogMask noDisplay">
 		<div id="changePasswordMaskInner">
 			<label class="defaultLabel smallLabel dialogLabel" toggleSet="changePassword">Cambia password</label>
@@ -83,9 +83,12 @@ $(function(){
 	<c:if test="${hideProfileControls != true}">
 		<c:choose>
 			<c:when test="${user != null}">
-				<span id="statusBar_profileBtnContainer" class="statusBar_btnContainer rFloating">
-					<div id="statusBar_profileBtn" class="statusBar_btn"></div>
-				</span>
+			
+				<c:if test="${hideProfileBtn != true}">
+					<span id="statusBar_profileBtnContainer" class="statusBar_btnContainer rFloating">
+						<div id="statusBar_profileBtn" class="statusBar_btn"></div>
+					</span>
+				</c:if>
 				
 				<c:if test="${showPlusBtn == true}">
 					<c:if test="${plusBtnIcon == null}">
@@ -105,86 +108,87 @@ $(function(){
 					</script>
 				</c:if>
 
-				<div id="profileMenu" class="noDisplay">
-					<label id="changePwdBtn" class="defaultLabel noWrap first menuItem">Cambia password</label>
-					<label id="logoutBtn" class="defaultLabel noWrap last menuItem"><fmt:message key="COMMON.LOGOUT"/></label>
-				</div>
-				
+				<c:if test="${hideProfileBtn != true}">
+					<div id="profileMenu" class="noDisplay">
+						<label id="changePwdBtn" class="defaultLabel noWrap first menuItem">Cambia password</label>
+						<label id="logoutBtn" class="defaultLabel noWrap last menuItem"><fmt:message key="COMMON.LOGOUT"/></label>
+					</div>
 			
-		        <script>
-		        	$(function(){
-			            UI = $.extend(UI, {
-			            	profileBtn: $('#statusBar_profileBtn'),
-			            	profileBtnContainer: $('#statusBar_profileBtnContainer'),
-			            	profileMenu: $('#profileMenu'),
-			                linkMailAddressMask: $('#linkMailAddressMask'),
-			                changePwdBtn: $('#changePwdBtn'),
-				            changePwdActualInput: $('#changePassword_actual-input'),
-				            changePwdNewInput: $('#changePassword_new-input'),
-				            changePwdConfirmNewInput: $('#changePassword_confirmNew-input'),
-				            changePwdMask: $('#changePasswordMask'),
-				            changePwdCancelBtn: $('#changePassword-cancel-button'),
-				            changePwdConfirmBtn: $('#changePassword-confirm-button')
-			            });
-			            
-		                UI.profileBtn.on('click', function(){
-		                    if(UI.profileMenu.attr('d') == '1'){
-		                    	UI.profileBtnContainer.removeClass('statusBar_btnContainerPressed');
-		                    	UI.profileMenu.attr('d', '0').slideUp(400);
-		                    } else {
-		                    	UI.profileBtnContainer.addClass('statusBar_btnContainerPressed');
-		                    	UI.profileMenu.attr('d', '1').slideDown(400);
-		                    }
-		                });
-		                
-		                $('#logoutBtn').on('click', function(){
-		                	showLoadingMask(function(){
-			                	window.location.replace('logout');
-		                	});
-		                });
-		                
-			            UI.changePwdBtn.on('click', function(){
-		        			showLoadingMask(function(){
-		        				UI.changePwdMask.removeClass('noDisplay').center('absolute', null, null, '10000');
-		        				UI.changePwdActualInput.focus();
-		        			});
-			            });
-			            
-			            UI.changePwdCancelBtn.on('click', function(){
-			        		resetAndHideChangePasswordMask();
+			        <script>
+			        	$(function(){
+				            UI = $.extend(UI, {
+				            	profileBtn: $('#statusBar_profileBtn'),
+				            	profileBtnContainer: $('#statusBar_profileBtnContainer'),
+				            	profileMenu: $('#profileMenu'),
+				                linkMailAddressMask: $('#linkMailAddressMask'),
+				                changePwdBtn: $('#changePwdBtn'),
+					            changePwdActualInput: $('#changePassword_actual-input'),
+					            changePwdNewInput: $('#changePassword_new-input'),
+					            changePwdConfirmNewInput: $('#changePassword_confirmNew-input'),
+					            changePwdMask: $('#changePasswordMask'),
+					            changePwdCancelBtn: $('#changePassword-cancel-button'),
+					            changePwdConfirmBtn: $('#changePassword-confirm-button')
+				            });
+				            
+			                UI.profileBtn.on('click', function(){
+			                    if(UI.profileMenu.attr('d') == '1'){
+			                    	UI.profileBtnContainer.removeClass('statusBar_btnContainerPressed');
+			                    	UI.profileMenu.attr('d', '0').slideUp(400);
+			                    } else {
+			                    	UI.profileBtnContainer.addClass('statusBar_btnContainerPressed');
+			                    	UI.profileMenu.attr('d', '1').slideDown(400);
+			                    }
+			                });
+			                
+			                $('#logoutBtn').on('click', function(){
+			                	showLoadingMask(function(){
+				                	window.location.replace('logout');
+			                	});
+			                });
+			                
+				            UI.changePwdBtn.on('click', function(){
+			        			showLoadingMask(function(){
+			        				UI.changePwdMask.removeClass('noDisplay').center('absolute', null, null, '10000');
+			        				UI.changePwdActualInput.focus();
+			        			});
+				            });
+				            
+				            UI.changePwdCancelBtn.on('click', function(){
+				        		resetAndHideChangePasswordMask();
+				        	});
+				            
+				            UI.changePwdConfirmBtn.on('click', function(){
+				            	$.post('changePassword', {
+				            		a: MD5(UI.changePwdActualInput.val()),
+				            		n: MD5(UI.changePwdNewInput.val()),
+				            		cn: MD5(UI.changePwdConfirmNewInput.val())
+				        		}).done(function(response){
+				        			if(response.substr(0, 9) == 'redirect_'){
+				        				response = response.substr(9);
+				        				redirect(response);
+				        			} else if(response.substr(0, 6) == 'error_'){
+				        				response = response.substr(6);
+				        				// TODO mostrare l'errore
+				        			} else {
+				        				resetAndHideChangePasswordMask();
+				        			}
+				        		});
+				            });
+				            
+				            var resetAndHideChangePasswordMask = function(){
+				        		UI.changePwdActualInput.val('');
+				        		UI.changePwdNewInput.val('');
+				        		UI.changePwdConfirmNewInput.val('');
+				        		UI.changePwdMask.addClass('noDisplay');
+				        		
+				        		hideLoadingMask(function(){
+				        			UI.changePwdBtn.removeAttr('disabled');
+				        		});
+				        	};
 			        	});
-			            
-			            UI.changePwdConfirmBtn.on('click', function(){
-			            	$.post('changePassword', {
-			            		a: MD5(UI.changePwdActualInput.val()),
-			            		n: MD5(UI.changePwdNewInput.val()),
-			            		cn: MD5(UI.changePwdConfirmNewInput.val())
-			        		}).done(function(response){
-			        			if(response.substr(0, 9) == 'redirect_'){
-			        				response = response.substr(9);
-			        				redirect(response);
-			        			} else if(response.substr(0, 6) == 'error_'){
-			        				response = response.substr(6);
-			        				// TODO mostrare l'errore
-			        			} else {
-			        				resetAndHideChangePasswordMask();
-			        			}
-			        		});
-			            });
-			            
-			            var resetAndHideChangePasswordMask = function(){
-			        		UI.changePwdActualInput.val('');
-			        		UI.changePwdNewInput.val('');
-			        		UI.changePwdConfirmNewInput.val('');
-			        		UI.changePwdMask.addClass('noDisplay');
-			        		
-			        		hideLoadingMask(function(){
-			        			UI.changePwdBtn.removeAttr('disabled');
-			        		});
-			        	};
-		        	});
-	                
-	            </script>
+		                
+		            </script>
+	            </c:if>
 	        
 		    </c:when>
 		    <c:otherwise>

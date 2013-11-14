@@ -65,6 +65,7 @@
 					<c:set var="plusBtnOnClick">createCoffer</c:set>
 					<c:set var="plusBtnIcon">coffee_add.png</c:set>
 					<c:set var="useCustomStatusBarContent">true</c:set>
+					<c:set var="hideProfileBtn">true</c:set>
 					<c:set var="statusBarCustomContent">
 						<span class="statusBarGroupOverviewTitle">${groupName}<br>
 						    <span class="statusBarGroupOverviewSubTitle"><fmt:message key="GROUP_OVERVIEW.GROUP_DETAILS_LINK.${cssPath}"/></span>
