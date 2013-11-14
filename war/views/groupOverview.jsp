@@ -86,11 +86,12 @@
 									<label id="positionLabel" class="defaultLabel"><fmt:message key="INDEX.TODAY_IS"/></label>
 								</div>
 								<div class="row">
-									<span class="defaultLabel noWrapLabel">${nextOfferer}
-										<button id="otherwiseBtn" class="defaultButton blue small rFloating" type="button">
-											<span class="defaultButtonLabel blueButtonLabel"><fmt:message key="COMMON.QUESTION.OTHERWISE"/></span>
-										</button>
-									</span>
+									<span class="defaultLabel noWrapLabel">${nextOfferer}</span>
+								</div>
+								<div class="row">
+									<button id="otherwiseBtn" class="defaultButton blue small" type="button">
+										<span class="defaultButtonLabel blueButtonLabel"><fmt:message key="COMMON.QUESTION.OTHERWISE"/></span>
+									</button>
 								</div>
 								<div class="row full high">
 									<div id="index_activeCoffers"></div>

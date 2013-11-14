@@ -38,7 +38,7 @@
 					</c:set>
 					<%@include file="common/statusBar.jsp"%>
 					<div id="login-container">
-						<div class="row high">
+						<div class="row high noDisplay">
 							<label id="errorMessage" class="defaultLabel red smallLabel noDisplay"></label>
 						</div>
 						<div class="row lTextAligned">
