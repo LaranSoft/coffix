@@ -4,10 +4,18 @@
 	padding-bottom: 50px;
 }
 
-.row {padding: 0px 20px;}
+.row {padding: 0px 10px;}
 .row.full {padding: 0px;}
-.row, .row.full {margin-bottom: 20px;}
-.row.high{padding-top: 20px;}
+.row, .row.full {margin-bottom: 10px;}
+.row.high {padding-top: 10px;}
+
+/*********************************************************
+* DIMENSIONI DEL FONT
+**********************************************************/
+.fontSmall {font-size: 12px;}
+.fontMedium {font-size: 15px;}
+.fontLarge {font-size: 18px;}
+
 
 /*********************************************************
 * ELEMENTI DI INPUT
@@ -22,11 +30,11 @@
 }
 
 .defaultLabel {
-	font-size: 25px;
+	font-size: 15px;
 }
 
 .defaultLabel.smallLabel {
-	font-size: 18px;
+	font-size: 12px;
 }
 
 
@@ -91,6 +99,8 @@
 .listContainer.curvedBorder {
     border-radius: 12px;
 }
+
+.listItemWrapper {line-height: 27px;}
 
 .listItemWrapper.curvedBorder:first-child {
     border-top-left-radius: 12px;

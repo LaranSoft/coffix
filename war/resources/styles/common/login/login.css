@@ -1,7 +1,1 @@
-.statusBarLoginTitle {
-	float: left;
-	text-align: left;
-	line-height: 50px;
-	color: white;
-	font-size: 25px;
-}
+.statusBarLoginTitle {line-height: 50px;}

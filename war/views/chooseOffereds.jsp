@@ -42,17 +42,18 @@
 			<div id="main-content-wrapper">
 				<div id="main-content">
 					<div id="blockMask" class="noDisplay"></div>
+					<c:set var="hideProfileBtn">true</c:set>
+					<c:if test="${user != null}">
+						<c:set var="useCustomStatusBarContent">true</c:set>
+						<c:set var="statusBarCustomContent">
+							<span class="statusBarChooseOfferedsTitle lFloating white fontLarge">Nuovo Coffer</span>
+						</c:set>
+					</c:if>
 					<%@include file="common/statusBar.jsp"%>
 					<div id="chooseOffereds-container">
 						<div class="row high">
-							<label class="defaultLabel verticalMiddleAligned"><fmt:message key="CHOOSE_OFFEREDS.CURRENT_ACTION.LABEL"/></label>
-						</div>
-						
-						<div class="row high">
 							<label id="chooseOffereds_whoIsOfferer" class="defaultLabel"><fmt:message key="CHOOSE_OFFEREDS.SELECT_OFFERED.LABEL"/></label>
-						</div>
-						
-						<div class="row">
+							<br/>
 							<input id="chooseOffereds_offered-input" class="defaultInput" name="offered" type="text" placeholder="<fmt:message key="CHOOSE_OFFEREDS.SELECT_OFFERED.PLACEHOLDER"/>"/>
 						</div>
 						

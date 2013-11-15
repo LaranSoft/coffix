@@ -36,26 +36,23 @@
 			<div id="main-content-wrapper">
 				<div id="main-content">
 					<div id="blockMask" class="noDisplay"></div>
+					<c:set var="hideProfileBtn">true</c:set>
+					<c:if test="${user != null}">
+						<c:set var="useCustomStatusBarContent">true</c:set>
+						<c:set var="showPlusBtn">true</c:set>
+						<c:set var="plusBtnIcon">user_add.png</c:set>
+						<c:set var="plusBtnOnClick">goToManageGroup</c:set>
+						<c:set var="statusBarCustomContent">
+							<span class="statusBarChooseOffererTitle lFloating white fontLarge">Nuovo Coffer</span>
+						</c:set>
+					</c:if>
 					<%@include file="common/statusBar.jsp"%>
 					<div id="chooseOfferer_mainContent">
 						<div class="row high">
-							<label class="defaultLabel verticalMiddleAligned"><fmt:message key="CHOOSE_OFFERER.CURRENT_ACTION.LABEL"/></label>
-						</div>
-						
-						<div class="row high">
 							<div id="chooseOfferer-container">
-								<label class="defaultLabel singleLineLabel centeredLabel"><fmt:message key="CHOOSE_OFFERER.SELECT_OFFERER.LABEL"/></label>
+								<label class="defaultLabel noWrap fontMedium"><fmt:message key="CHOOSE_OFFERER.SELECT_OFFERER.LABEL"/></label>
 								<br>
 								<input id="chooseOfferer_offerer-input" class="defaultInput" name="offerer" type="text" placeholder="<fmt:message key="CHOOSE_OFFERER.SELECT_OFFERER.PLACEHOLDER"/>"/>
-								<div id="chooseOfferer_inviteUser-container" class="rTextAligned">
-									<label class="defaultLabel smallLabel">Non trovi chi stai cercando?</label>
-									<br>
-									<label class="defaultLabel smallLabel">Forse non è nel gruppo:</label>
-									<br>
-									<button id="chooseOfferer_manageGroup-button" class="defaultButton blue" type="button">
-										<span class="defaultButtonLabel blueButtonLabel">Invitalo</span>
-									</button>
-								</div>
 							</div>
 						</div>
 					</div>

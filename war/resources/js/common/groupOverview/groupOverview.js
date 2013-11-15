@@ -46,19 +46,23 @@ $(function(){
 	};
 	
 	UI.otherwiseBtn.bind('click', function(){
-		$.post('groupOverview', {
-			i: index, 
-			groupId: groupId
-		}).done(function(response){
-			if(response.substr(0, 9) == 'redirect_'){
-				response = response.substr(9);
-				redirect(response);
-			} else if(response.substr(0, 6) == 'error_'){
-				response = response.substr(6);
-				// TODO gestire gli errori
-		    } else {
-		    	window.location.replace(response);
-		    }
+		showLoadingMask(function(){
+			$.post('groupOverview', {
+				i: index, 
+				groupId: groupId
+			}).done(function(response){
+				if(response.substr(0, 9) == 'redirect_'){
+					response = response.substr(9);
+					redirect(response);
+				} else if(response.substr(0, 6) == 'error_'){
+					response = response.substr(6);
+					// TODO gestire gli errori
+			    } else {
+			    	window.location.replace(response);
+			    }
+			}).fail(function(){
+				hideLoadingMask();
+			});
 		});
 	});
 	
@@ -124,20 +128,24 @@ $(function(){
 	}
 	
 	$('[offered]').on('click', function(event){
-		event.preventDefault();
-		$.post('confirmCoffer', {
-			a: $(this).attr('id'),
-			groupId: groupId
-		}).done(function(response){
-			if(response.substr(0, 9) == 'redirect_'){
-				response = response.substr(9);
-				redirect(response);
-			} else if(response.substr(0, 6) == 'error_'){
-				response = response.substr(6);
-				// TODO gestire gli errori
-		    } else {
-		    	window.location.replace('');
-		    }
+		var self = this;
+		showLoadingMask(function(){
+			$.post('confirmCoffer', {
+				a: $(self).attr('id'),
+				groupId: groupId
+			}).done(function(response){
+				if(response.substr(0, 9) == 'redirect_'){
+					response = response.substr(9);
+					redirect(response);
+				} else if(response.substr(0, 6) == 'error_'){
+					response = response.substr(6);
+					// TODO gestire gli errori
+			    } else {
+			    	window.location.replace('');
+			    }
+			}).fail(function(){
+				hideLoadingMask();
+			});
 		});
 	});
 	
@@ -173,20 +181,25 @@ $(function(){
 				
 				$(this).removeAttr('expirationTime').append(html);
 				$(this).find('[registerCoffer]').removeAttr('registerCoffer').on('click', function(){
-					$.post('registerCoffer', {
-						k: $(this).attr('key'),
-						a: $(this).attr('action'),
-						groupId: groupId
-					}).done(function(response){
-						if(response.substr(0, 9) == 'redirect_'){
-							response = response.substr(9);
-							redirect(response);
-						} else if(response.substr(0, 6) == 'error_'){
-							response = response.substr(6);
-							// TODO gestire gli errori
-					    } else {
-					    	window.location.replace('');
-					    }
+					var self = $(this);
+					showLoadingMask(function(){
+						$.post('registerCoffer', {
+							k: self.attr('key'),
+							a: self.attr('action'),
+							groupId: groupId
+						}).done(function(response){
+							if(response.substr(0, 9) == 'redirect_'){
+								response = response.substr(9);
+								redirect(response);
+							} else if(response.substr(0, 6) == 'error_'){
+								response = response.substr(6);
+								// TODO gestire gli errori
+						    } else {
+						    	window.location.replace('');
+						    }
+						}).fail(function(){
+							hideLoadingMask();
+						});
 					});
 				});
 			}

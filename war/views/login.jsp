@@ -34,7 +34,7 @@
 					<c:set var="hideProfileControls">true</c:set>
 					<c:set var="useCustomStatusBarContent">true</c:set>
 					<c:set var="statusBarCustomContent">
-						<span class="statusBarLoginTitle">Login</span>
+						<span class="statusBarLoginTitle lFloating white fontLarge">Login</span>
 					</c:set>
 					<%@include file="common/statusBar.jsp"%>
 					<div id="login-container">
