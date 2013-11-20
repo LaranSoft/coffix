@@ -26,11 +26,11 @@ public abstract class Views {
 	}
 	
 	public static String home(HttpServletRequest request){
-		return getPath(request) + "home.jsp";
+		return getPath(request) + "test/homePage.jsp";
 	}
 	
 	public static String groupOverview(HttpServletRequest request){
-		return getPath(request) + "groupOverview.jsp";
+		return getPath(request) + "test/groupOverviewPage.jsp";
 	}
 	
 	public static String registration(HttpServletRequest request){
@@ -38,15 +38,15 @@ public abstract class Views {
 	}
 	
 	public static String chooseOfferer(HttpServletRequest request){
-		return getPath(request) + "chooseOfferer.jsp";
+		return getPath(request) + "test/chooseOffererPage.jsp";
 	}
 	
 	public static String manageGroup(HttpServletRequest request){
-		return getPath(request) + "manageGroup.jsp";
+		return getPath(request) + "test/manageGroupPage.jsp";
 	}
 	
 	public static String chooseOffereds(HttpServletRequest request){
-		return getPath(request) + "chooseOffereds.jsp";
+		return getPath(request) + "test/chooseOfferedsPage.jsp";
 	}
 	
 }

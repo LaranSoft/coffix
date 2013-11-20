@@ -69,6 +69,110 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
+    
+    
+    
+    <servlet>
+		<servlet-name>LoginPage</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.TestLoginPageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginPage</servlet-name>
+		<url-pattern>/loginPage</url-pattern>
+	</servlet-mapping>
+	 <servlet>
+		<servlet-name>RegistrationPage</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.RegistrationPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistrationPage</servlet-name>
+		<url-pattern>/registrationPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>HomePage</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.TestHomePageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomePage</servlet-name>
+		<url-pattern>/homePage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>GroupOverviewPage</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.GroupOverviewPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GroupOverviewPage</servlet-name>
+		<url-pattern>/groupOverviewPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ManageGroupPage</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.ManageGroupPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManageGroupPage</servlet-name>
+		<url-pattern>/manageGroupPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChooseOffererPage</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.ChooseOffererPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChooseOffererPage</servlet-name>
+		<url-pattern>/chooseOffererPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChooseOfferedsPage</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.ChooseOfferedsPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChooseOfferedsPage</servlet-name>
+		<url-pattern>/chooseOfferedsPage</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>LoginService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.TestLoginService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginService</servlet-name>
+		<url-pattern>/loginService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegistrationService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.RegistrationService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistrationService</servlet-name>
+		<url-pattern>/registrationService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ManageInvitationService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.ManageInvitationService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManageInvitationService</servlet-name>
+		<url-pattern>/manageInvitationService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CreateGroupService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.CreateGroupService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateGroupService</servlet-name>
+		<url-pattern>/createGroupService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChangePasswordService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.ChangePasswordService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePasswordService</servlet-name>
+		<url-pattern>/changePasswordService</url-pattern>
+	</servlet-mapping>
+	
+	
+	
     <servlet>
 		<servlet-name>Login</servlet-name>
 		<servlet-class>it.halfone.coffix.servlet.LoginServlet</servlet-class>
@@ -191,6 +295,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     </servlet-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>home</welcome-file>
+		<welcome-file>views/test/_.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
