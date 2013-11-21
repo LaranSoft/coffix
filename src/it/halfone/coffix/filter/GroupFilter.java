@@ -32,11 +32,6 @@ public class GroupFilter implements Filter{
 			HttpServletRequest request = req instanceof HttpServletRequest ? (HttpServletRequest) req : null;
 			
 			if(request.getMethod() == "POST"){
-				String requestedServlet = request.getRequestURI();
-				if(requestedServlet.startsWith("/")){
-					requestedServlet = requestedServlet.substring(1);
-				}
-				
 				resp.setCharacterEncoding("UTF-8");
 			    resp.setContentType("text/plain");		
 			    resp.getWriter().write("redirect_1");

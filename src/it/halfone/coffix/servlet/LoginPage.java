@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * TestLoginPageServlet - 16/nov/2013
+ * LoginPage - 16/nov/2013
  *
  * @author Andrea La Rosa
  */
-public class TestLoginPageServlet extends HttpServlet{
+public class LoginPage extends HttpServlet{
 
 	private static final long serialVersionUID = 4228452589834800392L;
 

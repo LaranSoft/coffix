@@ -1,7 +1,6 @@
 package it.halfone.coffix.filter;
 
 import it.halfone.coffix.constants.SessionKeys;
-import it.halfone.coffix.constants.Views;
 import it.halfone.coffix.dao.User;
 
 import java.io.IOException;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -28,26 +26,13 @@ public class AuthenticationFilter implements Filter{
 		User user = (User) request.getSession().getAttribute(SessionKeys.USER);
 		
 		if(user == null){
-			String requestedServlet = request.getRequestURI();
-			if(requestedServlet.startsWith("/")){
-				requestedServlet = requestedServlet.substring(1);
-			}
-			
 			if(request.getMethod().equals("POST")){
 				resp.setCharacterEncoding("UTF-8");
 			    resp.setContentType("text/plain");		
 			    resp.getWriter().write("redirect_0");
-			} else {
-				String fwd = requestedServlet;
-				
-				req.setAttribute("fwd", fwd);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher(Views.login(request));
-				dispatcher.forward(req, resp);
-			}
-			return;
+			    return;
+			} 
 		}
-		
 		chain.doFilter(req, resp);
 	}
 
