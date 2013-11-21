@@ -21,7 +21,7 @@
 	});
 </script>
 
-<script type="text/javascript" src="/resources/js/test/chooseOffereds/chooseOffereds.js"></script>
+<script type="text/javascript" src="/resources/js/chooseOffereds/chooseOffereds.js"></script>
 		
 <link type="text/css" rel="stylesheet" href="/resources/styles/common/chooseOffereds/chooseOffereds.css"/>
 <link type="text/css" rel="stylesheet" href="/resources/styles/${cssPath}/chooseOffereds/chooseOffereds.css"/>

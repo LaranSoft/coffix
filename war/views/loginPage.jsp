@@ -1,6 +1,6 @@
 <%@include file="common/common.jsp"%>
 
-<script type="text/javascript" src="/resources/js/test/login/login.js"></script>
+<script type="text/javascript" src="/resources/js/login/login.js"></script>
 
 <link type="text/css" rel="stylesheet" href="/resources/styles/common/login/login.css"/>
 <link type="text/css" rel="stylesheet" href="/resources/styles/${cssPath}/login/login.css"/>

@@ -41,8 +41,8 @@
 	</c:forEach>
 </script>
 		
-<script type="text/javascript" src="/resources/js/test/groupOverview/groupOverview.js"></script>
-<script type="text/javascript" src="/resources/js/test/${cssPath}/groupOverview/groupOverview.js"></script>
+<script type="text/javascript" src="/resources/js/groupOverview/groupOverview.js"></script>
+<script type="text/javascript" src="/resources/js/${cssPath}/groupOverview/groupOverview.js"></script>
 	
 <c:set var="showPlusBtn">true</c:set>
 <c:set var="plusBtnOnClick">createCoffer</c:set>

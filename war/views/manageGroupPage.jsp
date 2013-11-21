@@ -28,7 +28,7 @@
           </c:forEach>
 </script>
 
-<script type="text/javascript" src="/resources/js/test/manageGroup/manageGroup.js"></script>
+<script type="text/javascript" src="/resources/js/manageGroup/manageGroup.js"></script>
 		
 <link type="text/css" rel="stylesheet" href="/resources/styles/common/manageGroup/manageGroup.css"/>
 <link type="text/css" rel="stylesheet" href="/resources/styles/${cssPath}/manageGroup/manageGroup.css"/>

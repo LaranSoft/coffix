@@ -35,7 +35,7 @@
 	</c:forEach>
 </script>
 		
-<script type="text/javascript" src="/resources/js/test/home/home.js"></script>
+<script type="text/javascript" src="/resources/js/home/home.js"></script>
 	
 <link type="text/css" rel="stylesheet" href="/resources/styles/common/home/home.css"/>
 <link type="text/css" rel="stylesheet" href="/resources/styles/${cssPath}/home/home.css"/>

@@ -16,7 +16,7 @@
 	var groupId = '${groupId}';
 </script>
 		
-<script type="text/javascript" src="/resources/js/test/chooseOfferer/chooseOfferer.js"></script>
+<script type="text/javascript" src="/resources/js/chooseOfferer/chooseOfferer.js"></script>
 		
 <link type="text/css" rel="stylesheet" href="/resources/styles/common/chooseOfferer/chooseOfferer.css"/>
 <link type="text/css" rel="stylesheet" href="/resources/styles/${cssPath}/chooseOfferer/chooseOfferer.css"/>
