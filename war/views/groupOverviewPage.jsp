@@ -78,7 +78,7 @@
 				<span class="defaultButtonLabel blueButtonLabel"><fmt:message key="COMMON.QUESTION.OTHERWISE"/></span>
 			</button>
 		</div>
-		<div class="row full high">
+		<div class="row full high lTextAligned">
 			<div id="index_activeCoffers"></div>
 		</div>
 	</c:otherwise>

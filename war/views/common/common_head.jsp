@@ -33,11 +33,9 @@
 	var UI = {};
 </script>
 
-<script type="text/javascript" src="${contextPath}/resources/js/common/common.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/ext/webtoolkit.md5.js"></script>				
-<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="resources/js/ext/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/ext/jquery.ui.min.js"></script>				
-<script type="text/javascript" src="${contextPath}/resources/js/ext/jquery.qtip.js"></script>				
 <script type="text/javascript" src="${contextPath}/resources/js/ext/center.js"></script>				
 <script type="text/javascript" src="${contextPath}/resources/js/ext/smartresize.js"></script>				
 <script type="text/javascript" src="${contextPath}/resources/js/ext/jquery.validationEngine.js"></script>				

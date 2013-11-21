@@ -141,7 +141,6 @@ var groupOverviewPage = {
 	                	onFail(response.errorCode);
 	                } else {
 	                	$.post('groupOverviewPage', {
-	    					i: index, 
 	    					groupId: groupId
 	    				}).done(function(response){
 	    					if(response.substr(0, 9) == 'redirect_'){
