@@ -1,5 +1,9 @@
 var loginPage = {
 
+	renderer: function(data){
+		
+	},
+		
 	onInit: function(){
 	    var loginUI = $.extend({}, UI, {
 	        errorMessageLabel: $('#errorMessage'),

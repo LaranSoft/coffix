@@ -1,9 +1,6 @@
 <%@include file="common/common.jsp"%>
 
 <script>
-	var currentPage = 'home';
-	var loggedUser = '${user}';
-	
 	var errorCodes = $.extend(commonErrorCodes, {
 		'200': '<fmt:message key="ERROR_CODES.CREATE_GROUP.200"/>',
 		'201': '<fmt:message key="ERROR_CODES.CREATE_GROUP.201"/>',
