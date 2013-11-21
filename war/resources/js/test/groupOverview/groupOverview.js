@@ -196,19 +196,31 @@ var groupOverviewPage = {
 					$(this).find('[registerCoffer]').removeAttr('registerCoffer').on('click', function(){
 						var self = $(this);
 						showLoadingMask(function(){
-							$.post('registerCoffer', {
+							$.post('registerCofferService', {
 								k: self.attr('key'),
 								a: self.attr('action'),
 								groupId: groupId
 							}).done(function(response){
-								if(response.substr(0, 9) == 'redirect_'){
-									response = response.substr(9);
-									redirect(response);
-								} else if(response.substr(0, 6) == 'error_'){
-									response = response.substr(6);
-									// TODO gestire gli errori
-							    } else {
-							    	window.location.replace('');
+								response = JSON.parse(response);
+				                
+				                if(response.status == 'KO'){
+				                	onFail(response.errorCode);
+				                } else {
+				                	$.post('groupOverviewPage', {
+				    					i: index, 
+				    					groupId: groupId
+				    				}).done(function(response){
+				    					if(response.substr(0, 9) == 'redirect_'){
+				    						response = response.substr(9);
+				    						redirect(response);
+				    					} else {
+				    						$('#pageContainer').html($.trim(response));
+				    	            		groupOverviewPage.onInit();
+				                			hideLoadingMask();
+				    				    }
+				    				}).fail(function(){
+				    					hideLoadingMask();
+				    				});
 							    }
 							}).fail(function(){
 								hideLoadingMask();

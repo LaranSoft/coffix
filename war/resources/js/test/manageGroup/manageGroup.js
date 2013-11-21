@@ -72,18 +72,16 @@ var manageGroupPage = {
 		};
 		
 		var inviteUser = function(){
-			$.post('inviteUser', {
+			$.post('inviteUserService', {
 				groupId: groupId,
 				username: manageGroupUI.manageGroupUsernameInput.val()
 			}).done(function(response){
-				if(response.substr(0, 6) == 'error_'){
-					response = response.substr(6);
-					manageGroupUI.manageGroupErrorLabel.html(errorCodes[response]);
-				} else if(response.substr(0, 9) == 'redirect_'){
-					response = response.substr(9);
-					redirect(response);
-				} else {
-					response = JSON.parse(response);
+				response = JSON.parse(response);
+                
+                if(response.status == 'KO'){
+                	onFail(response.errorCode);
+                } else {
+					response = response.data;
 					var listItem = createInvitedListItem(response.username, response.basename, true);
 					manageGroupUI.manageGroupPartecipantContainer.prepend(listItem.html);
 					

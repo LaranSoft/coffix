@@ -130,6 +130,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	
 	
+	
 	<servlet>
 		<servlet-name>LoginService</servlet-name>
 		<servlet-class>it.halfone.coffix.servlet.TestLoginService</servlet-class>
@@ -169,6 +170,46 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>ChangePasswordService</servlet-name>
 		<url-pattern>/changePasswordService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ConfirmCofferService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.ConfirmCofferService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConfirmCofferService</servlet-name>
+		<url-pattern>/confirmCofferService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegisterCofferService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.RegisterCofferService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegisterCofferService</servlet-name>
+		<url-pattern>/registerCofferService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CreateCofferService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.CreateCofferService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateCofferService</servlet-name>
+		<url-pattern>/createCofferService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>InviteUserService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.InviteUserService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InviteUserService</servlet-name>
+		<url-pattern>/inviteUserService</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogoutService</servlet-name>
+		<servlet-class>it.halfone.coffix.servlet.LogoutService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutService</servlet-name>
+		<url-pattern>/logoutService</url-pattern>
 	</servlet-mapping>
 	
 	

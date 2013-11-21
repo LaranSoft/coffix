@@ -155,7 +155,19 @@
 			                
 			                $('#logoutBtn').on('click', function(){
 			                	showLoadingMask(function(){
-				                	window.location.replace('logout');
+				                	$.post('logoutService').done(function(response){
+				                		response = JSON.parse(response);
+						                
+						                if(response.status == 'KO'){
+						                	onFail(response.errorCode);
+						                } else {
+						                	$.post('homePage').done(function(response){
+						                		$('#pageContainer').html($.trim(response));
+						            			homePage.onInit();
+						            			hideLoadingMask();
+						                	});
+					        			}
+				                	});
 			                	});
 			                });
 			                
