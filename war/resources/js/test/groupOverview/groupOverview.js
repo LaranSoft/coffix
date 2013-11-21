@@ -131,18 +131,30 @@ var groupOverviewPage = {
 		$('[offered]').on('click', function(event){
 			var self = this;
 			showLoadingMask(function(){
-				$.post('confirmCoffer', {
+				$.post('confirmCofferService', {
 					a: $(self).attr('id'),
 					groupId: groupId
 				}).done(function(response){
-					if(response.substr(0, 9) == 'redirect_'){
-						response = response.substr(9);
-						redirect(response);
-					} else if(response.substr(0, 6) == 'error_'){
-						response = response.substr(6);
-						// TODO gestire gli errori
-				    } else {
-				    	window.location.replace('');
+					response = JSON.parse(response);
+	                
+	                if(response.status == 'KO'){
+	                	onFail(response.errorCode);
+	                } else {
+	                	$.post('groupOverviewPage', {
+	    					i: index, 
+	    					groupId: groupId
+	    				}).done(function(response){
+	    					if(response.substr(0, 9) == 'redirect_'){
+	    						response = response.substr(9);
+	    						redirect(response);
+	    					} else {
+	    						$('#pageContainer').html($.trim(response));
+	    	            		groupOverviewPage.onInit();
+	                			hideLoadingMask();
+	    				    }
+	    				}).fail(function(){
+	    					hideLoadingMask();
+	    				});
 				    }
 				}).fail(function(){
 					hideLoadingMask();
@@ -211,6 +223,8 @@ var groupOverviewPage = {
 			updateRemainingTimes();
 			setTimeout(startUpdating, 1000);
 		};
+		
+		bindCofferControls();
 		
 		startUpdating();
 		

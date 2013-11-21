@@ -26,7 +26,7 @@ var formatRemainingTime = function(value){
 	return hours + ':' + minutes + ':' + value;
 };
 
-$(function(){
+var bindCofferControls = function(){
 	$('[offeredContainer]').each(function(){
 		var self = this;
 		$(this).on('mouseover', function(){
@@ -36,4 +36,4 @@ $(function(){
 			$(self).attr('hovered', '0').find('[toggleVisibility]').addClass('noVisibility');
 		});
 	});
-});
+};

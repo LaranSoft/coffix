@@ -31,6 +31,6 @@ var formatRemainingTime = function(value){
 	return null;
 };
 
-$(function(){
+var bindCofferControls = function(){
 	$('[offeredContainer]').find('[toggleVisibility]').removeClass('noVisibility');
-});
+};
