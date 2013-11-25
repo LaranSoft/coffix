@@ -9,13 +9,7 @@
 		<%@include file="common/common_body.jsp"%>
 		<script>
 			$(function(){
-				showLoadingMask(function(){
-					$.post('homePage', function(response){
-						$('#pageContainer').html($.trim(response));
-            			homePage.onInit();
-            			hideLoadingMask();
-					});
-				});
+				loadPage('homePage');
 			});
 		</script>
 		

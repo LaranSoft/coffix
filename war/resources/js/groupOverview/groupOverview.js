@@ -1,8 +1,64 @@
-var createCoffer;
+var createCoffer = function(){};
+var delta = 0;
 
 var groupOverviewPage = {
-	onInit: function(){
 	
+	render: function(data){
+		
+		createCoffer = function(){
+			loadPage('chooseOffererPage', {
+				groupId: data.groupId
+			});
+		};
+		
+		var statusBarOptions = {
+			showPlusBtn: true,
+			plusBtnOnClick: createCoffer,
+			plusBtnIcon: 'coffee_add.png',
+			useCustomStatusBarContent: true,
+			statusBarCustomContent: '<span class="statusBarGroupOverviewTitle">' + data.groupName + '<br><span class="statusBarGroupOverviewSubTitle">' + data.bundles.groupDetailsLink + '</span></span>',
+			showProfileBtn: false,
+			showBackButton: true,
+			backPage: 'homePage',
+			user: data.user
+		};
+		
+		var html = statusBar.render(statusBarOptions);
+		
+		if(!data.nextOfferer){
+			html += '<div class="row high">';
+			html +=     '<label class="defaultLabel">' + data.bundles.noUserPresent + '</label>';
+			html += '</div>';
+			html += '<button id="inviteUserBtn" class="defaultButton blue" type="button">';
+			html +=     '<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.addUserToGroup + '</span>';
+			html += '</button>';
+		} else {
+			html += '<div class="row high">';
+			html +=     '<label id="positionLabel" class="defaultLabel">' + data.bundles.todayIs + '</label>';
+			html += '</div>';
+			html += '<div class="row">';
+			html +=     '<span class="defaultLabel noWrapLabel">' + data.nextOfferer + '</span>';
+			html += '</div>';
+			html += '<div class="row">';
+			html +=     '<button id="otherwiseBtn" class="defaultButton blue small" type="button">';
+			html +=         '<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.otherwise + '</span>';
+			html +=     '</button>';
+			html += '</div>';
+			html += '<div class="row full high lTextAligned">';
+			html +=     '<div id="index_activeCoffers"></div>';
+			html += '</div>';
+		}
+		
+		return html;
+	},
+		
+	onInit: function(data){
+	
+		var nowByServer = data.now;
+		var nowByClient = new Date().getTime();
+		
+		delta = Number(nowByServer) - nowByClient;
+		
 		var groupOverviewUI = $.extend({}, UI, {
 			inviteUserBtn: $('#inviteUserBtn'), 
 			otherwiseBtn: $('#otherwiseBtn'),
@@ -13,7 +69,7 @@ var groupOverviewPage = {
 		var goToManageGroupPage = function(){
 			showLoadingMask(function(){
 				$.post('manageGroupPage', {
-					groupId: groupId
+					groupId: data.groupId
 				}).done(function(response){
 					if(response.substr(0, 9) == 'redirect_'){
 						response = response.substr(9);
@@ -30,45 +86,21 @@ var groupOverviewPage = {
 		groupOverviewUI.inviteUserBtn.bind('click', goToManageGroupPage);
 		groupOverviewUI.statusBarGroupOverviewTitle.bind('click', goToManageGroupPage);
 		
-		createCoffer = function(){
-			showLoadingMask(function(){
-				$.post('chooseOffererPage', {
-					groupId: groupId
-				}).done(function(response){
-					if(response.substr(0, 9) == 'redirect_'){
-						response = response.substr(9);
-						redirect(response);
-					} else {
-						$('#pageContainer').html($.trim(response));
-	            		chooseOffererPage.onInit();
-            			hideLoadingMask();
-				    }
-				});
-			});
-		};
-		
 		groupOverviewUI.otherwiseBtn.bind('click', function(){
 			showLoadingMask(function(){
-				$.post('groupOverviewPage', {
-					i: index, 
-					groupId: groupId
-				}).done(function(response){
-					if(response.substr(0, 9) == 'redirect_'){
-						response = response.substr(9);
-						redirect(response);
-					} else {
-						$('#pageContainer').html($.trim(response));
-	            		groupOverviewPage.onInit();
-            			hideLoadingMask();
-				    }
-				}).fail(function(){
-					hideLoadingMask();
+				loadPage('groupOverviewPage', {
+					i: data.index, 
+					groupId: data.groupId
 				});
 			});
 		});
 		
-		for(var i=0; i<coffers.length; i++){
-			var coffer = coffers[i];
+		for(var i=0; i<data.coffers.length; i++){
+			var coffer = data.coffers[i];
+			
+			coffer.creator = JSON.parse(coffer.creator);
+			coffer.offerer = JSON.parse(coffer.offerer);
+			coffer.offereds = JSON.parse(coffer.offereds);
 			
 			var html = '<h3 offeredContainer>';
 			html += '<span class="cofferExpirationTime expirationTimeLabel noWrap" key="' + coffer.key + '" state="' + coffer.state + '" expirationTime="' + coffer.expireTime + '"></span>';
@@ -77,19 +109,19 @@ var groupOverviewPage = {
 			
 			html += '<span class="coffererDisplayName' + offererColorClass + ' noWrap">' + coffer.offerer.displayName + '</span>';
 			
-			if(loggedUser == coffer.offerer.displayName){
+			if(data.user == coffer.offerer.displayName){
 				if(coffer.offerer.hasNegate){
 					html += '<button id="' + coffer.key + ';' + coffer.offerer.username + ';1" offered toggleVisibility class="confirmCoffer defaultButton red small rFloating noVisibility" type="button">';
-					html +=	'<span class="defaultButtonLabel blueButtonLabel">' + bundles.confirm + '</span>';
+					html +=	'<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.confirm + '</span>';
 					html +=	'</button>';
 				} else {
 					html += '<button id="' + coffer.key + ';' + coffer.offerer.username + ';0" offered toggleVisibility class="confirmCoffer defaultButton blue small rFloating noVisibility" type="button">';
-					html +=	'<span class="defaultButtonLabel blueButtonLabel">' + bundles.negate + '</span>';
+					html +=	'<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.negate + '</span>';
 					html +=	'</button>';
 				}
 			}
 			
-			html += '<span toggleVisibility class="cofferCreator noVisibility">' + bundles.createdBy + '&nbsp;' + coffer.creator.displayName + '</span>';
+			html += '<span toggleVisibility class="cofferCreator noVisibility">' + data.bundles.createdBy + '&nbsp;' + coffer.creator.displayName + '</span>';
 			html += '</h3>'
 			
 			html += '<div>';
@@ -110,14 +142,14 @@ var groupOverviewPage = {
 				
 				html += '>' + offered.displayName + '</p>';
 				
-				if(loggedUser == offered.displayName){
+				if(data.user == offered.displayName){
 					if(offered.hasNegate){
 						html += '<button id="' + coffer.key + ';' + offered.username + ';1" offered toggleVisibility class="confirmCoffer defaultButton red small rFloating noVisibility" type="button">';
-						html +=	'<span class="defaultButtonLabel blueButtonLabel">' + bundles.confirm + '</span>';
+						html +=	'<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.confirm + '</span>';
 						html +=	'</button>';
 					} else {
 						html += '<button id="' + coffer.key + ';' + offered.username + ';0" offered toggleVisibility class="confirmCoffer defaultButton blue small rFloating noVisibility" type="button">';
-						html +=	'<span class="defaultButtonLabel blueButtonLabel">' + bundles.negate + '</span>';
+						html +=	'<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.negate + '</span>';
 						html +=	'</button>';
 					}
 				}
@@ -133,26 +165,15 @@ var groupOverviewPage = {
 			showLoadingMask(function(){
 				$.post('confirmCofferService', {
 					a: $(self).attr('id'),
-					groupId: groupId
+					groupId: data.groupId
 				}).done(function(response){
 					response = JSON.parse(response);
 	                
 	                if(response.status == 'KO'){
 	                	onFail(response.errorCode);
 	                } else {
-	                	$.post('groupOverviewPage', {
-	    					groupId: groupId
-	    				}).done(function(response){
-	    					if(response.substr(0, 9) == 'redirect_'){
-	    						response = response.substr(9);
-	    						redirect(response);
-	    					} else {
-	    						$('#pageContainer').html($.trim(response));
-	    	            		groupOverviewPage.onInit();
-	                			hideLoadingMask();
-	    				    }
-	    				}).fail(function(){
-	    					hideLoadingMask();
+	                	loadPage('groupOverviewPage', {
+	    					groupId: data.groupId
 	    				});
 				    }
 				}).fail(function(){
@@ -170,8 +191,8 @@ var groupOverviewPage = {
 			}
 		});
 		
-		if(index && Number(index) > 2){
-			groupOverviewUI.positionLabel.html(bundles.positionLabel);
+		if(data.index && Number(data.index) > 2){
+			groupOverviewUI.positionLabel.html(data.bundles.positionLabel);
 		}
 		
 		var updateRemainingTimes = function(){
@@ -198,27 +219,16 @@ var groupOverviewPage = {
 							$.post('registerCofferService', {
 								k: self.attr('key'),
 								a: self.attr('action'),
-								groupId: groupId
+								groupId: data.groupId
 							}).done(function(response){
 								response = JSON.parse(response);
 				                
 				                if(response.status == 'KO'){
 				                	onFail(response.errorCode);
 				                } else {
-				                	$.post('groupOverviewPage', {
-				    					i: index, 
-				    					groupId: groupId
-				    				}).done(function(response){
-				    					if(response.substr(0, 9) == 'redirect_'){
-				    						response = response.substr(9);
-				    						redirect(response);
-				    					} else {
-				    						$('#pageContainer').html($.trim(response));
-				    	            		groupOverviewPage.onInit();
-				                			hideLoadingMask();
-				    				    }
-				    				}).fail(function(){
-				    					hideLoadingMask();
+				                	loadPage('groupOverviewPage', {
+				    					i: data.index, 
+				    					groupId: data.groupId
 				    				});
 							    }
 							}).fail(function(){

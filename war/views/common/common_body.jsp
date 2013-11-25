@@ -15,7 +15,7 @@
 </style>
 
 <script>
-    jQuery.fn.center.options = {
+    $.fn.center.options = {
         absolute: null,
         horizontal: true,
         vertical: false

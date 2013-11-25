@@ -23,7 +23,3 @@
 
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="it.halfone.coffix.bundle.MessagesBundle"/>
-
-<script>
-	var isMobile = '${isMobile}';
-</script>

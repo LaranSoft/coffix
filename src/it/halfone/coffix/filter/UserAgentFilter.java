@@ -30,6 +30,7 @@ public class UserAgentFilter implements Filter{
 
 	    boolean isMobile = detector.detectTierTablet() || detector.detectTierIphone();
     	request.setAttribute("mobile", isMobile);
+    	request.setAttribute("userAgentMainType", isMobile ? "mobile" : "desktop");
 
 	    chain.doFilter(req, resp);
 	}

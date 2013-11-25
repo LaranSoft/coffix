@@ -1,7 +1,37 @@
 var loginPage = {
 
-	renderer: function(data){
+	statusBarOptions: {
+		showProfileControls: false,
+		useCustomStatusBarContent: true,
+		statusBarCustomContent: '<span class="statusBarLoginTitle lFloating white fontLarge">Login</span>',
+		showBackButton: true,
+		backPage: 'homePage'
+	},
 		
+	render: function(data){
+		
+		var html = statusBar.render(loginPage.statusBarOptions);
+		
+		html += '<div class="row high noDisplay">';
+		html +=     '<label id="errorMessage" class="defaultLabel red smallLabel noDisplay"></label>';
+		html += '</div>';
+		html += '<div class="row lTextAligned">';
+		html +=     '<form id="index_login-form">';
+		html +=         '<input id="index_username-input" class="defaultInput" name="username" type="text" autocomplete="off" placeholder="' + data.bundles.usernameLabel + '"/>';
+		html +=         '<input id="index_password-input" class="defaultInput" name="password" type="password" autocomplete="off" placeholder="' + data.bundles.passwordLabel + '"/>';
+		html +=     '</form>';
+		html += '</div>';
+		html += '<div class="row rTextAligned">';
+		html +=     '<button id="index_login-submit-button" class="defaultButton blue" type="button">';
+		html +=         '<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.buttonLabel + '</span>';
+		html +=     '</button>';
+		html +=     '<div id="noRegistrationLinkContainer">';
+		html +=         '<label class="defaultLabel smallLabel blockDisplay">' + data.bundles.noRegistrationMessage + '</label>';
+		html +=         '<label id="registrationLink" class="defaultLabel smallLabel link">' + data.bundles.noRegistrationLink + '</label>';
+		html +=     '</div>';
+		html += '</div>';
+		
+		return html;
 	},
 		
 	onInit: function(){
@@ -36,9 +66,7 @@ var loginPage = {
 	                if(response.status == 'KO'){
 	                	onFail(response.errorCode);
 	                } else {
-	                	$.post('homePage', function(response){
-	                		$('#pageContainer').html($.trim(response));
-	            			homePage.onInit();
+	                	getPage('homePage', {}, function(){
 	            			hideLoadingMask();
 	                	});
 	                }
@@ -55,15 +83,7 @@ var loginPage = {
 	    });
 	    
 	    loginUI.registrationLink.on('click', function(){
-	        showLoadingMask(function(){
-	        	$.post('registrationPage').done(function(response){
-            		$('#pageContainer').html($.trim(response));
-            		registrationPage.onInit();
-        			hideLoadingMask();
-        		}).fail(function(){
-        			// TODO mostrare l'errore generico
-        		});
-	        });
+	        loadPage('registrationPage');
 	    });
 	    
 	    statusBar.onInit();

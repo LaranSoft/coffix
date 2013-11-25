@@ -1,3 +1,6 @@
+<link type="text/css" rel="stylesheet" href="${contextPath}/resources/styles/common/statusBar.css"/>
+<link type="text/css" rel="stylesheet" href="${contextPath}/resources/styles/${cssPath}/common/statusBar.css"/>
+
 <script>
 	var statusBar = {
 		callback: [],

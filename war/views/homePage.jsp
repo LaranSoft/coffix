@@ -54,7 +54,7 @@
 	<div id="createGroupMaskInner">
 		<label class="defaultLabel smallLabel dialogLabel" toggleSet="createGroup"><fmt:message key="CREATE_GROUP.CHOOSE_NAME.LABEL"/></label>
 		<br>
-		<label id="createGroupErrorLabel" class="noDisplay defaultLabel smallLabel red dialogLabel" toggleSet="createGroup"><fmt:message key="CREATE_GROUP.CHOOSE_NAME.LABEL"/></label>
+		<label id="createGroupErrorLabel" class="noDisplay defaultLabel smallLabel red dialogLabel" toggleSet="createGroup"></label>
 		<br>
 		<input id="createGroup_name-input" toggleSet="createGroup" class="defaultInput" name="name" type="text" placeholder="<fmt:message key="CREATE_GROUP.NAME_INPUT.PLACEHOLDER"/>"/>
 		<br>

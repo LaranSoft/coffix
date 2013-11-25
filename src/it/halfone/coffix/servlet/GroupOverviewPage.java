@@ -1,9 +1,11 @@
 package it.halfone.coffix.servlet;
+import it.halfone.coffix.configuration.Configuration;
 import it.halfone.coffix.constants.Entities;
 import it.halfone.coffix.constants.Keys;
+import it.halfone.coffix.constants.Paths;
 import it.halfone.coffix.constants.SessionKeys;
-import it.halfone.coffix.constants.Views;
 import it.halfone.coffix.dao.Coffer;
+import it.halfone.coffix.dao.PageDescription;
 import it.halfone.coffix.dao.PartecipatingGroupUser;
 import it.halfone.coffix.dao.User;
 
@@ -13,9 +15,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,30 +49,42 @@ public class GroupOverviewPage extends HttpServlet {
 	
 	private static final long serialVersionUID = 1877555854786610617L;
 
-
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	    doPost(req, resp);
-	}
-	
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User) request.getSession().getAttribute(SessionKeys.USER);
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		PageDescription pd = new PageDescription();
+		pd.getCssFiles().add(Paths.COMMON_CSS + "/groupOverview/groupOverview.css");
+		pd.getCssFiles().add(Paths.CSS + "/" + req.getAttribute("userAgentMainType") + "/groupOverview/groupOverview.css");
+		
+		pd.getJsFiles().add(Paths.JS + "/groupOverview/groupOverview.js");
+		pd.getJsFiles().add(Paths.JS + "/" + req.getAttribute("userAgentMainType") + "/groupOverview/groupOverview.js");
+		
+		Map<String, String> bundles = new HashMap<>();
+		bundles.put("noUserPresent", Configuration.getInstance().get("INDEX.NO_USER_PRESENT"));
+		bundles.put("addUserToGroup", Configuration.getInstance().get("INDEX.ADD_USERS_TO_GROUP"));
+		bundles.put("todayIs", Configuration.getInstance().get("INDEX.TODAY_IS"));
+		bundles.put("otherwise", Configuration.getInstance().get("COMMON.QUESTION.OTHERWISE"));
+		bundles.put("negate", Configuration.getInstance().get("COMMON.NEGATE"));
+		bundles.put("confirm", Configuration.getInstance().get("INDEX.CANCEL_NEGATE"));
+		bundles.put("createdBy", Configuration.getInstance().get("COMMON.CREATED_BY"));
+		bundles.put("registerCoffer", Configuration.getInstance().get("INDEX.REGISTER_COFFER"));
+		bundles.put("erase", Configuration.getInstance().get("COMMON.ERASE"));
+		bundles.put("groupDetailsLink", Configuration.getInstance().get("GROUP_OVERVIEW.GROUP_DETAILS_LINK." + req.getAttribute("userAgentMainType")));
+		pd.getData().put("bundles", bundles);
+		
+		User user = (User) req.getSession().getAttribute(SessionKeys.USER);
     	
-		String groupId = request.getParameter("groupId");
-		String forwardPage = Views.groupOverview(request);
-		request.setAttribute("groupId", groupId);
-		request.setAttribute("user", user.getBaseName());
+		String groupId = req.getParameter("groupId");
+		
+		pd.getData().put("groupId", groupId);
+		pd.getData().put("user", user.getBaseName());
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		
-		String indexParam = request.getParameter("i");
+		String indexParam = req.getParameter("i");
 		int index = 1;
 		if(!StringUtils.isEmpty(indexParam)){
 			index = Integer.parseInt(indexParam);
@@ -96,8 +111,8 @@ public class GroupOverviewPage extends HttpServlet {
 				index = 1;
 			}
 			
-			request.setAttribute("nextOfferer", partecipatingUserListToSort.get(index-1).getDisplayName());
-			request.setAttribute("index", index+1);
+			pd.getData().put("nextOfferer", partecipatingUserListToSort.get(index-1).getDisplayName());
+			pd.getData().put("index", index+1);
 		}
 		
 		Key cofferKey = KeyFactory.createKey(Keys.Coffer.KIND, Keys.Coffer.NAME);
@@ -117,12 +132,13 @@ public class GroupOverviewPage extends HttpServlet {
 			
 			cofferList.add(coffer);
 		}
-		request.setAttribute("coffers", cofferList);
-		request.setAttribute("groupName", groupEntity.getProperty(Entities.Group.Property.NAME));
+		pd.getData().put("coffers", cofferList);
+		pd.getData().put("groupName", groupEntity.getProperty(Entities.Group.Property.NAME));
 
-		request.setAttribute("now", new Date().getTime());
+		pd.getData().put("now", new Date().getTime());
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardPage);
-		dispatcher.forward(request, response);
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/plain");
+		resp.getWriter().write(new Gson().toJson(pd));
 	}
 }
