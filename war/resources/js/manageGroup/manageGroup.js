@@ -1,5 +1,42 @@
 var manageGroupPage = {
-	onInit: function(){
+		
+	render: function(data){
+		
+		var statusBarOptions = {
+			showBackButton: true,
+			backPage: 'homePage',
+			user: data.user
+		};
+		
+		var html = statusBar.render(statusBarOptions);
+
+		html += '<div class="row high">';
+		html +=     '<label class="defaultLabel">' + data.bundles.group + '&nbsp' + data.groupName + '</label>';
+		html += '</div>';
+		html += '<div class="row">';
+		html +=     '<label id="manageGroupErrorLabel" class="defaultLabel noWrap smallLabel red"></label>';
+		html +=     '<label class="defaultLabel noWrap smallLabel">' + data.bundles.insertUsernameLabel + '</label>';
+		html +=     '<br>';
+		html +=     '<input id="manageGroup_usernameInput" class="defaultInput" name="username" type="text"/>';
+		html +=     '<br>';
+		html += '</div>';
+		html += '<div class="row">';
+		html +=     '<button id="inviteUserBtn" class="defaultButton red" type="button">';
+		html +=         '<span class="defaultButtonLabel blueButtonLabel">Invita</span>';
+		html +=     '</button>';
+		html += '</div>';
+		html += '<div class="row">';
+		html +=     '<label class="defaultLabel noWrap">' + data.bundles.partecipantsLabel + '</label>';
+		html += '</div>';
+		html += '<div class="row">';
+		html +=     '<div id="manageGroup_partecipantContainer" class="listContainer"></div>';
+		html += '</div>';
+		
+		return html;
+	},
+		
+		
+	onInit: function(data){
 		
 		var manageGroupUI = $.extend(UI, {
 			manageGroupInviteUserBtn: $('#inviteUserBtn'),
@@ -30,9 +67,9 @@ var manageGroupPage = {
 			html += '<label class="defaultLabel noWrap">' + basename + '</label>';
 			
 			html += '<div class="invitedListItemCommandContainer rFloating">';
-			html += '<label class="defaultLabel noWrap invitedLabel">' + bundles.invitedWaitConfirm + '<br/></label>';
-			html += '<button ' + manageInvitationAttr + ' groupId="' + groupId + '" action="0" username="' + username + '" class="defaultButton red small invitedListItemButton" type="button">';
-			html +=	'<span class="defaultButtonLabel blueButtonLabel">' + bundles.cancel + '</span>';
+			html += '<label class="defaultLabel noWrap invitedLabel">' + data.bundles.invitedWaitConfirm + '<br/></label>';
+			html += '<button ' + manageInvitationAttr + ' groupId="' + data.groupId + '" action="0" username="' + username + '" class="defaultButton red small invitedListItemButton" type="button">';
+			html +=	'<span class="defaultButtonLabel blueButtonLabel">' + data.bundles.cancel + '</span>';
 			html +=	'</button>';
 			html += '</div>';
 			
@@ -73,7 +110,7 @@ var manageGroupPage = {
 		
 		var inviteUser = function(){
 			$.post('inviteUserService', {
-				groupId: groupId,
+				groupId: data.groupId,
 				username: manageGroupUI.manageGroupUsernameInput.val()
 			}).done(function(response){
 				response = JSON.parse(response);
@@ -101,14 +138,14 @@ var manageGroupPage = {
 		
 		manageGroupUI.manageGroupInviteUserBtn.bind('click', inviteUser);
 		
-		for(var invitedUsername in invitedUserMap){
-			var listItem = createInvitedListItem(invitedUsername, invitedUserMap[invitedUsername]);
+		for(var invitedUsername in data.invitedUserMap){
+			var listItem = createInvitedListItem(invitedUsername, data.invitedUserMap[invitedUsername]);
 			manageGroupUI.manageGroupPartecipantContainer.append(listItem.html);
 			bindControlsToInvitedListItem(listItem);
 		}
 		
-		for(var i=0; i<groupPartecipant.length; i++){
-			var listItem = createListItem(groupPartecipant[i]);
+		for(var i=0; i<data.groupPartecipantList.length; i++){
+			var listItem = createListItem(data.groupPartecipantList[i]);
 			manageGroupUI.manageGroupPartecipantContainer.append(listItem.html);
 		}
 		

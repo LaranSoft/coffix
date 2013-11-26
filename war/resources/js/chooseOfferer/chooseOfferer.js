@@ -9,6 +9,12 @@ var chooseOffererPage = {
 		
 	render: function(data){
 		
+		goToManageGroup = function(){
+			loadPage('manageGroupPage', {
+				groupId: data.groupId
+			});
+		};
+		
 		var statusBarOptions = {};
 		if(data.user != null){
 			statusBarOptions.user = data.user;
@@ -34,10 +40,14 @@ var chooseOffererPage = {
 		return html;
 	},
 		
-	onInit: function(){
+	onInit: function(data){
 		chooseOffererUI = $.extend(UI, {
 			selectOffererInput: $('#chooseOfferer_offerer-input'),
 			manageGroupBtn: $('#chooseOfferer_manageGroup-button')
+		});
+		
+		var availableUser = $.map(data.partecipatingUserMap, function(value, index){
+			return index;
 		});
 		
 		chooseOffererUI.selectOffererInput.autocomplete({
@@ -46,8 +56,8 @@ var chooseOffererPage = {
 			select: function(event, ui){
 				showLoadingMask(function(){
 					$.post('chooseOfferedsPage', {
-						groupId: groupId, 
-						offerer: partecipatingUserMap[ui.item.value]
+						groupId: data.groupId, 
+						offerer: data.partecipatingUserMap[ui.item.value]
 					}).done(function(response){
 						if(response.substr(0, 9) == 'redirect_'){
 							response = response.substr(9);
@@ -61,23 +71,6 @@ var chooseOffererPage = {
 				});
 			}
 		});
-		
-		goToManageGroup = function(){
-			showLoadingMask(function(){
-				$.post('manageGroupPage', {
-					groupId: groupId
-				}).done(function(response){
-					if(response.substr(0, 9) == 'redirect_'){
-						response = response.substr(9);
-						redirect(response);
-					} else {
-						$('#pageContainer').html($.trim(response));
-						manageGroupPage.onInit();
-            			hideLoadingMask();
-					}
-				});
-			});
-		};
 		
 		chooseOffererUI.manageGroupBtn.on('click', goToManageGroup);
 		

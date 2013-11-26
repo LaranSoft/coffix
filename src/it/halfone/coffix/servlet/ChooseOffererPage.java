@@ -76,7 +76,7 @@ public class ChooseOffererPage extends HttpServlet {
 		
 		Map<String, String> partecipatingUserMap = new HashMap<>();
 		for(PartecipatingGroupUser partecipatingUser : partecipatingUserList){
-			partecipatingUserMap.put(partecipatingUser.getUsername(), partecipatingUser.getDisplayName());
+			partecipatingUserMap.put(partecipatingUser.getDisplayName(), partecipatingUser.getUsername());
 		}
 		
 		pd.getData().put("partecipatingUserMap", partecipatingUserMap);

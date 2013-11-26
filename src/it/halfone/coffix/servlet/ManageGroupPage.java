@@ -1,8 +1,10 @@
 package it.halfone.coffix.servlet;
+import it.halfone.coffix.configuration.Configuration;
 import it.halfone.coffix.constants.Entities;
 import it.halfone.coffix.constants.Keys;
+import it.halfone.coffix.constants.Paths;
 import it.halfone.coffix.constants.SessionKeys;
-import it.halfone.coffix.constants.Views;
+import it.halfone.coffix.dao.PageDescription;
 import it.halfone.coffix.dao.PartecipatingGroupUser;
 import it.halfone.coffix.dao.User;
 
@@ -13,7 +15,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,24 +42,31 @@ public class ManageGroupPage extends HttpServlet {
 	private static final long serialVersionUID = 8663805151922385604L;
 
 	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	    doPost(req, resp);
-	}
-	
-	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User) request.getSession().getAttribute(SessionKeys.USER);
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PageDescription pd = new PageDescription();
+		pd.getCssFiles().add(Paths.COMMON_CSS + "/manageGroup/manageGroup.css");
+		pd.getCssFiles().add(Paths.CSS + "/" + req.getAttribute("userAgentMainType") + "/manageGroup/manageGroup.css");
 		
-		String groupId = request.getParameter("groupId");
+		pd.getJsFiles().add(Paths.JS + "/manageGroup/manageGroup.js");
 		
-		request.setAttribute("groupId", groupId);
-		request.setAttribute("user", user.getBaseName());
+		Map<String, String> bundles = new HashMap<>();
+		bundles.put("group", Configuration.getInstance().get("COMMON.GROUP"));
+		bundles.put("insertUsernameLabel", Configuration.getInstance().get("MANAGE_GROUP.INSERT_USERNAME.LABEL"));
+		bundles.put("partecipantsLabel", Configuration.getInstance().get("MANAGE_GROUP.PARTECIPANTS.LABEL"));
+		bundles.put("invitedWaitConfirm", Configuration.getInstance().get("MANAGE_GROUP.INVITED_WAIT_CONFIRM"));
+		bundles.put("cancel", Configuration.getInstance().get("COMMON.CANCEL"));
+		
+		pd.getData().put("bundles", bundles);
+		
+		User user = (User) req.getSession().getAttribute(SessionKeys.USER);
+		
+		String groupId = req.getParameter("groupId");
+		
+		pd.getData().put("groupId", groupId);
+		pd.getData().put("user", user.getBaseName());
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		
@@ -82,13 +90,13 @@ public class ManageGroupPage extends HttpServlet {
 		String invitedUserMapStringified = ((Text) groupEntity.getProperty(Entities.Group.Property.INVITED_USER_MAP)).getValue();
 		Map<String, String> invitedUserMap = reader.fromJson(invitedUserMapStringified, HashMap.class);
 		
-		request.setAttribute("groupPartecipantList", partecipatingDisplayNameList);
-		request.setAttribute("invitedUserMap", invitedUserMap);
-		request.setAttribute("groupName", groupEntity.getProperty(Entities.Group.Property.NAME));
+		pd.getData().put("groupPartecipantList", partecipatingDisplayNameList);
+		pd.getData().put("invitedUserMap", invitedUserMap);
+		pd.getData().put("groupName", groupEntity.getProperty(Entities.Group.Property.NAME));
+
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/plain");
+		resp.getWriter().write(new Gson().toJson(pd));
 		
-		String forwardPage = Views.manageGroup(request);
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(forwardPage);
-		dispatcher.forward(request, response);
 	}
 }

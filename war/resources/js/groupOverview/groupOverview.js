@@ -67,19 +67,8 @@ var groupOverviewPage = {
 		});
 		
 		var goToManageGroupPage = function(){
-			showLoadingMask(function(){
-				$.post('manageGroupPage', {
-					groupId: data.groupId
-				}).done(function(response){
-					if(response.substr(0, 9) == 'redirect_'){
-						response = response.substr(9);
-						redirect(response);
-					} else {
-						$('#pageContainer').html($.trim(response));
-	            		manageGroupPage.onInit();
-            			hideLoadingMask();
-					}
-				});
+			loadPage('manageGroupPage', {
+				groupId: data.groupId
 			});
 		};
 		
