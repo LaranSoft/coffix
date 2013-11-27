@@ -147,9 +147,7 @@ var statusBar = {
 					                if(response.status == 'KO'){
 					                	onFail(response.errorCode);
 					                } else {
-					                	$.post('homePage').done(function(response){
-					                		$('#pageContainer').html($.trim(response));
-					            			homePage.onInit();
+					                	getPage('homePage', {}, function(response){
 					            			hideLoadingMask();
 					                	});
 				        			}

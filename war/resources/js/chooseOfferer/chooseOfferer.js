@@ -4,6 +4,7 @@ var chooseOffererPage = {
 		
 	statusBarOptions: {
 		showProfileBtn: false,
+		showBackButton: true,
 		backPage: 'homePage'
 	},
 		
@@ -54,20 +55,9 @@ var chooseOffererPage = {
 			source: availableUser,
 			minLength: 1,
 			select: function(event, ui){
-				showLoadingMask(function(){
-					$.post('chooseOfferedsPage', {
-						groupId: data.groupId, 
-						offerer: data.partecipatingUserMap[ui.item.value]
-					}).done(function(response){
-						if(response.substr(0, 9) == 'redirect_'){
-							response = response.substr(9);
-							redirect(response);
-						} else {
-							$('#pageContainer').html($.trim(response));
-							chooseOfferedsPage.onInit();
-	            			hideLoadingMask();
-						}
-					});
+				loadPage('chooseOfferedsPage', {
+					groupId: data.groupId, 
+					offerer: data.partecipatingUserMap[ui.item.value]
 				});
 			}
 		});
