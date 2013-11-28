@@ -45,6 +45,8 @@
 		head: $('head')
 	};
 	
+	var actualPage = null;
+	
 	var getPage = function(pageName, options, callback){
 		options = options || {};
 		$.post(pageName, options).done(function(response){
@@ -63,8 +65,13 @@
 			
 			var html = window[pageName].render(response.data);
 			
+			if(actualPage && actualPage.onDestroy){
+				actualPage.onDestroy();
+			}
+			actualPage = window[pageName];
+			
 			$('#pageContainer').html(html);
-			window[pageName].onInit(response.data);
+			actualPage.onInit(response.data);
 		}).always(function(){
 			callback();
 		});

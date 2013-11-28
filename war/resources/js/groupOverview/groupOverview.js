@@ -3,6 +3,8 @@ var delta = 0;
 
 var groupOverviewPage = {
 	
+	continueUpdating: true,
+		
 	render: function(data){
 		
 		createCoffer = function(){
@@ -51,7 +53,7 @@ var groupOverviewPage = {
 		
 		return html;
 	},
-		
+	
 	onInit: function(data){
 	
 		var nowByServer = data.now;
@@ -216,7 +218,6 @@ var groupOverviewPage = {
 				                	onFail(response.errorCode);
 				                } else {
 				                	loadPage('groupOverviewPage', {
-				    					i: data.index, 
 				    					groupId: data.groupId
 				    				});
 							    }
@@ -230,8 +231,11 @@ var groupOverviewPage = {
 		};
 		
 		var startUpdating = function(){
+			console.log('start updating');
 			updateRemainingTimes();
-			setTimeout(startUpdating, 1000);
+			if(groupOverviewPage.continueUpdating == true){
+				setTimeout(startUpdating, 1000);
+			}
 		};
 		
 		bindCofferControls();
@@ -239,5 +243,11 @@ var groupOverviewPage = {
 		startUpdating();
 		
 		statusBar.onInit();
+	},
+	
+	onDestroy: function(){
+		groupOverviewPage.continueUpdating = false;
 	}
+	
+
 };
