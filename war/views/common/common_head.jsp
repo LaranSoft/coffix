@@ -52,14 +52,17 @@
 		$.post(pageName, options).done(function(response){
 			response = JSON.parse(response);
 			
+			UI.head.find('[pageLink]').remove();
+			UI.head.find('[pageScript]').remove();
+			
 			if(response.cssFiles){
 				for(var i=0; i<response.cssFiles.length; i++){
-					UI.head.append($('<link type="text/css" rel="stylesheet" href="' + response.cssFiles[i] + '"/>'));
+					UI.head.append($('<link pageLink type="text/css" rel="stylesheet" href="' + response.cssFiles[i] + '"/>'));
 				}
 			}
 			if(response.jsFiles){
 				for(var i=0; i<response.jsFiles.length; i++){
-					UI.head.append($('<script type="text/javascript" src="' + response.jsFiles[i] + '">'));
+					UI.head.append($('<script pageScript type="text/javascript" src="' + response.jsFiles[i] + '">'));
 				}
 			}
 			

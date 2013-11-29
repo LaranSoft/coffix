@@ -1,8 +1,8 @@
-<!-- Indices written at Wed, 27 Nov 2013 12:54:51 CET -->
+<!-- Indices written at Fri, 29 Nov 2013 14:57:13 CET -->
 
 <datastore-indexes>
 
-    <!-- Used 9 times in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="Coffer" ancestor="true" source="auto">
         <property name="group" direction="asc"/>
         <property name="expirationTime" direction="asc"/>

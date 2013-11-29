@@ -12,10 +12,19 @@ import java.util.Map;
  */
 public class PageDescription {
 
+	private Collection<String> persistentCssFiles = new ArrayList<>();
+	
 	private Collection<String> cssFiles = new ArrayList<>();
 	private Collection<String> jsFiles = new ArrayList<>();
 	private Map<String, Object> data = new HashMap<>();
 	
+	
+	public Collection<String> getPersistentCssFiles() {
+		return persistentCssFiles;
+	}
+	public void setPersistentCssFiles(Collection<String> persistentCssFiles) {
+		this.persistentCssFiles = persistentCssFiles;
+	}
 	public Collection<String> getCssFiles() {
 		return cssFiles;
 	}

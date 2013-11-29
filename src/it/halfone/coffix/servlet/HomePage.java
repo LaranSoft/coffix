@@ -60,6 +60,10 @@ public class HomePage extends HttpServlet{
 				bundles.put("the", Configuration.getInstance().get("HOME.THE"));
 				bundles.put("coffee", Configuration.getInstance().get("HOME.COFFEE"));
 				bundles.put("matrix", Configuration.getInstance().get("HOME.MATRIX"));
+				
+				pd.getPersistentCssFiles().add(Paths.CSS + "/" + req.getAttribute("userAgentMainType") + "/common/common.css");
+				pd.getPersistentCssFiles().add(Paths.CSS + "/" + req.getAttribute("userAgentMainType") + "/common/button.css");
+				pd.getPersistentCssFiles().add(Paths.CSS + "/" + req.getAttribute("userAgentMainType") + "/common/statusBar.css");
 			} else {
 				bundles.put("createGroupChooseNameLabel", Configuration.getInstance().get("CREATE_GROUP.CHOOSE_NAME.LABEL"));
 				bundles.put("createGroupNameInputPlaceholder", Configuration.getInstance().get("CREATE_GROUP.NAME_INPUT.PLACEHOLDER"));

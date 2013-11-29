@@ -1,0 +1,174 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+		<meta name="viewport" content="height=device-height, width=device-width, user-scalable=no">
+		<title>Coffix - the Coffee Matrix</title>
+		
+		<link type="text/css" rel="stylesheet" href="/resources/styles/common/common.css"/>
+		<link type="text/css" rel="stylesheet" href="/resources/styles/desktop/ext/jquery.qtip.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/resources/styles/desktop/ext/jquery.validationEngine.css"/>
+		<link type="text/css" rel="stylesheet" href="/resources/styles/desktop/ext/jquery.ui.min.css"/>
+		<link type="text/css" rel="stylesheet" href="/resources/styles/common/statusBar.css"/>
+		
+		<script type="text/javascript" src="/resources/js/ext/webtoolkit.md5.js"></script>				
+		<script type="text/javascript" src="/resources/js/ext/jquery.min.js"></script>
+		<script type="text/javascript" src="/resources/js/ext/jquery.ui.min.js"></script>				
+		<script type="text/javascript" src="/resources/js/ext/center.js"></script>				
+		<script type="text/javascript" src="/resources/js/ext/smartresize.js"></script>				
+		<script type="text/javascript" src="/resources/js/ext/jquery.validationEngine.js"></script>				
+		<script type="text/javascript" src="/resources/js/ext/jquery.validationEngine-it.js"></script>
+		<script type="text/javascript" src="/resources/js/statusBar.js"></script>
+		
+		<style>
+			.scrollbar-measure {
+				width: 100px;
+				height: 100px;
+				overflow: scroll;
+				position: absolute;
+				top: -9999px;
+			}
+		</style>
+		
+		<script>
+			var redirect = function(code){
+				if(code == '0'){
+					window.location.replace('login');
+				} else if(code == '1'){
+					window.location.replace('home');
+				} 
+			};
+			
+			var UI = {
+				head: $('head')
+			};
+			
+			var actualPage = null;
+			
+			var getPage = function(pageName, options, callback){
+				options = options || {};
+				$.post(pageName, options).done(function(response){
+					response = JSON.parse(response);
+					
+					UI.head.find('[pageLink]').remove();
+					UI.head.find('[pageScript]').remove();
+					
+					if(response.cssFiles){
+						for(var i=0; i<response.cssFiles.length; i++){
+							UI.head.append($('<link pageLink type="text/css" rel="stylesheet" href="' + response.cssFiles[i] + '"/>'));
+						}
+					}
+					if(response.persistentCssFiles){
+						for(var i=0; i<response.persistentCssFiles.length; i++){
+							UI.head.append($('<link type="text/css" rel="stylesheet" href="' + response.persistentCssFiles[i] + '"/>'));
+						}
+					}
+					if(response.jsFiles){
+						for(var i=0; i<response.jsFiles.length; i++){
+							UI.head.append($('<script pageScript type="text/javascript" src="' + response.jsFiles[i] + '">'));
+						}
+					}
+					
+					var html = window[pageName].render(response.data);
+					
+					if(actualPage && actualPage.onDestroy){
+						actualPage.onDestroy();
+					}
+					actualPage = window[pageName];
+					
+					$('#pageContainer').html(html);
+					actualPage.onInit(response.data);
+				}).always(function(){
+					callback();
+				});
+			};
+			
+			var loadPage = function(pageName, options){
+				showLoadingMask(function(){
+		        	getPage(pageName, options, function(response){
+		    			hideLoadingMask();
+		    		});
+		        });
+			};
+		</script>
+	</head>
+	
+	<body>
+		<script>
+		    $.fn.center.options = {
+		        absolute: null,
+		        horizontal: true,
+		        vertical: false
+		    };
+		    
+		    if($.ui && $.ui.autocomplete){
+			    $.ui.autocomplete.filter = function (array, term) {
+			        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+			        return $.grep(array, function (value) {
+			            return matcher.test(value.label || value.value || value);
+			        });
+			    };
+		    }
+		    
+		    var showLoadingMask;
+		    var hideLoadingMask;
+		    
+		    $(function(){
+		    	UI = $.extend(UI, {
+		    		blockMask: $('#blockMask')
+		    	});
+		    	
+		    	UI.blockMask.on('click', function(event){
+		            event.preventDefault();
+		        });
+		    	
+		    	showLoadingMask = function(callback){
+		        	callback = callback || function(){};
+		        	UI.blockMask.removeClass('noDisplay').animate({
+		    			'opacity': 0.6
+		    		}, 300, callback);
+		        };
+		    	
+		        hideLoadingMask = function(callback){
+		        	callback = callback || function(){};
+		        	UI.blockMask.animate({
+		    			'opacity': 0
+		    		}, 300, function(){
+		    			UI.blockMask.addClass('noDisplay');
+		    			callback();
+		    		});
+		        };
+		        
+				var scrollDiv = document.createElement('div');
+				scrollDiv.className = 'scrollbar-measure';
+				document.body.appendChild(scrollDiv);
+				
+				var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+				var browserWidth = $(window).width();
+				
+				$('#main-content-wrapper').css('width', browserWidth - scrollbarWidth);
+				
+				document.body.removeChild(scrollDiv);
+				
+				$(window).on('resize', function(){
+					var browserWidth = $(window).width();
+					$('#main-content-wrapper').css('width', browserWidth - scrollbarWidth);
+				});
+			});
+		</script>
+		<script>
+			$(function(){
+				loadPage('homePage');
+			});
+		</script>
+		
+		<div id="main-container">
+			<div id="main-content-wrapper">
+				<div id="main-content">
+					<div id="blockMask" class="noDisplay"></div>
+					<div id="pageContainer">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
